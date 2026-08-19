@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>Order received, Fives Dev</title>
+<meta name="description" content="Thanks for booking with Fives Dev. Your order has been received and will begin once payment is verified.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fivesdev.co.za/order-success.html">
+<meta property="og:url" content="https://fivesdev.co.za/order-success.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="Order received, Fives Dev">
+<meta property="og:description" content="Thanks for booking with Fives Dev. Your order has been received and will begin once payment is verified.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Order received, Fives Dev">
+<meta name="twitter:description" content="Thanks for booking with Fives Dev. Your order has been received and will begin once payment is verified.">
+</head>
+<body class="checkout-shell">
+
+<header class="checkout-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    <div class="step-tracker">
+      <span class="tick done" id="tick-1">✓</span><span class="label">Your details</span>
+      <span class="sep"></span>
+      <span class="tick done" id="tick-2">✓</span><span class="label">Payment</span>
+      <span class="sep"></span>
+      <span class="tick active" id="tick-3">3</span><span class="label active">Confirmation</span>
+    </div>
+  </div>
+</header>
+
+<main class="success-shell" id="mainContent" style="display:none;">
+  <div class="success-card fade-in is-visible">
+    <div class="success-check">✓</div>
+    <h1>Thank you, your order is in.</h1>
+    <p>We've received your booking for the <strong id="pkgNameInline"></strong> package. Your project will kick off as soon as we've verified your payment within one business day.</p>
+
+    <div class="success-orderid-box">
+      <div class="label">Your Order ID</div>
+      <div class="value" id="orderIdValue"></div>
+      <p class="hint">Keep this reference safe, you'll see it on our replies too.</p>
+    </div>
+
+    <div class="next-step-grid">
+      <div class="next-step-item"><div class="ns-step">Step 1</div><div class="ns-title">Payment verified</div><p>We confirm your EFT within 1 business day.</p></div>
+      <div class="next-step-item"><div class="ns-step">Step 2</div><div class="ns-title">Kickoff call</div><p>A short call to align on scope, content and timelines.</p></div>
+      <div class="next-step-item"><div class="ns-step">Step 3</div><div class="ns-title">Design & launch</div><p>Preview → revisions → live site, delivered on schedule.</p></div>
+    </div>
+
+    <div class="success-actions">
+      <a href="#" id="proofEmailLink" class="btn btn-primary">Email proof of payment</a>
+      <a href="index.html" class="btn btn-ghost">Back to homepage</a>
+    </div>
+
+    <p class="success-footer-note">Questions? Email <a href="mailto:info@fivesdev.co.za">info@fivesdev.co.za</a></p>
+  </div>
+</main>
+
+<script src="js/order.js"></script>
+<script>
+  const order = loadOrder();
+  if (!order) {
+    window.location.href = 'checkout.html';
+  } else {
+    const pkg = PACKAGES[order.packageId];
+    document.getElementById('pkgNameInline').textContent = pkg.name;
+    document.getElementById('orderIdValue').textContent = order.orderId;
+    document.getElementById('proofEmailLink').href = 'mailto:payments@fivesdev.co.za?subject=' + encodeURIComponent('Proof of payment — ' + order.orderId);
+    document.getElementById('mainContent').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

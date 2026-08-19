@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>Start your repair request, Fives Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<link rel="canonical" href="https://fivesdev.co.za/repair-request.html">
+<meta property="og:url" content="https://fivesdev.co.za/repair-request.html">
+<meta name="description" content="Start an iPhone or Android screen and battery repair request with Fives Dev. Tell us your device and problem and we'll come back with a quote.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="Start your repair request, Fives Dev">
+<meta property="og:description" content="Start an iPhone or Android screen and battery repair request with Fives Dev. Tell us your device and problem and we'll come back with a quote.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Start your repair request, Fives Dev">
+<meta name="twitter:description" content="Start an iPhone or Android screen and battery repair request with Fives Dev. Tell us your device and problem and we'll come back with a quote.">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a href="iphone-repair.html" class="back-link">← Back to repairs</a>
+    <h1>Start your repair request</h1>
+    <p>Four quick steps, then a chance to check everything before it's sent.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <div class="step-track">
+      <div class="step-dot active" id="dot-1">1</div><div class="step-line"></div>
+      <div class="step-dot" id="dot-2">2</div><div class="step-line"></div>
+      <div class="step-dot" id="dot-3">3</div><div class="step-line"></div>
+      <div class="step-dot" id="dot-4">4</div><div class="step-line"></div>
+      <div class="step-dot" id="dot-5">5</div>
+    </div>
+
+    <div class="step-box">
+
+      <!-- STEP 1: Contact & delivery -->
+      <div class="wizard-step is-active" id="step-1">
+        <h2>Your details</h2>
+        <div class="form-group">
+          <label for="fullName">Full name</label>
+          <input type="text" id="fullName">
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone number</label>
+          <input type="tel" id="phoneNumber">
+        </div>
+        <div class="form-group">
+          <label>How do you want to get your phone to us?</label>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="delivery" value="Dropping it off myself" checked> Drop off myself</label>
+            <label class="radio-pill"><input type="radio" name="delivery" value="PAXI"> PAXI</label>
+            <label class="radio-pill"><input type="radio" name="delivery" value="The Courier Guy"> The Courier Guy</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address (needed if you'd like it couriered)</label>
+          <input type="text" id="address">
+        </div>
+        <p class="form-error" id="error-1"></p>
+        <div class="wizard-nav">
+          <span></span>
+          <button type="button" class="btn btn-primary" onclick="tryStep2()">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Device -->
+      <div class="wizard-step" id="step-2">
+        <h2>Your device</h2>
+        <div class="form-group">
+          <label>Device type</label>
+          <div class="radio-row">
+            <label class="radio-pill"><input type="radio" name="deviceType" value="iPhone" checked> iPhone</label>
+            <label class="radio-pill"><input type="radio" name="deviceType" value="Samsung"> Samsung</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="model">Model (e.g. iPhone 12, Galaxy A14)</label>
+          <input type="text" id="model">
+        </div>
+        <div class="form-group">
+          <label for="storage">Storage capacity (e.g. 128GB)</label>
+          <input type="text" id="storage">
+        </div>
+        <p class="form-error" id="error-2"></p>
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-ghost" onclick="goToStep(1)">Back</button>
+          <button type="button" class="btn btn-primary" onclick="tryStep3()">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Condition -->
+      <div class="wizard-step" id="step-3">
+        <h2>What's wrong with it?</h2>
+        <div class="form-group">
+          <label for="problem">Describe the problem</label>
+          <textarea id="problem"></textarea>
+        </div>
+        <div class="consent-box">
+          <input type="checkbox" id="notSure">
+          <label for="notSure">I'm not sure what's wrong with my device, I'll need a Fives Dev tech to look at it.</label>
+        </div>
+        <p class="form-error" id="error-3"></p>
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-ghost" onclick="goToStep(2)">Back</button>
+          <button type="button" class="btn btn-primary" onclick="tryStep4()">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Photos -->
+      <div class="wizard-step" id="step-4">
+        <h2>Upload photos of your device</h2>
+        <p>At least 6 photos, taken from all angles (front, back, both sides, top, bottom). This helps us check the damage before you even arrive.</p>
+        <div class="card-actions">
+         <a class="btn btn-primary" href="https://forms.gle/sgxr5RwVgfm2GiBC9" target="_blank" rel="noopener">Upload your photos</a>
+        </div>
+        <div class="consent-box" style="margin-top:16px;">
+          <input type="checkbox" id="photosUploaded">
+          <label for="photosUploaded">I've uploaded my photos</label>
+        </div>
+        <p class="form-error" id="error-4"></p>
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-ghost" onclick="goToStep(3)">Back</button>
+          <button type="button" class="btn btn-primary" onclick="tryReview()">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Review -->
+<div class="wizard-step" id="step-5">
+
+  <div id="reviewPanel">
+    <h2>Check your details</h2>
+    <p>Make sure everything looks right before you send it through. Tap Edit next to anything you need to fix.</p>
+    <ul class="review-list" id="reviewList"></ul>
+    <p class="form-error" id="error-5"></p>
+    <div class="wizard-nav">
+      <button type="button" class="btn btn-ghost" onclick="goToStep(4)">Back</button>
+      <button type="button" class="btn btn-accent" id="submitBtn" onclick="submitRequest()">Send request</button>
+    </div>
+  </div>
+
+  <div id="successPanel" style="display:none; text-align:center; padding:12px 0;">
+    <div class="success-check" style="margin:0 auto 16px;">✓</div>
+    <h2>Request received.</h2>
+    <p>Thanks, we've got your repair request. We'll message you on <strong id="successPhone"></strong> with a quote once we've had a look, then you can pay via <a href="payment-details.html?service=repair">bank transfer</a>.</p>
+    <div class="card-actions" style="justify-content:center; margin-top:16px;">
+      <a class="btn btn-ghost" href="iphone-repair.html">Back to repairs</a>
+      <a class="btn btn-primary" href="index.html">Back to Fives Dev</a>
+    </div>
+  </div>
+
+</div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">Fives Dev</div>
+    <div>Your next step, sorted. · South Africa</div>
+  </div>
+</footer>
+
+<script>
+function goToStep(n){
+  document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('is-active'));
+  document.getElementById('step-' + n).classList.add('is-active');
+  for(let i = 1; i <= 5; i++){
+    const dot = document.getElementById('dot-' + i);
+    dot.classList.remove('active','done');
+    if(i < n) dot.classList.add('done');
+    if(i === n) dot.classList.add('active');
+  }
+}
+
+function val(id){ return document.getElementById(id).value.trim(); }
+function radioVal(name){
+  const el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : '';
+}
+
+function showError(id, msg){
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearError(id){
+  const el = document.getElementById(id);
+  el.textContent = '';
+  el.classList.remove('show');
+}
+
+function tryStep2(){
+  clearError('error-1');
+  if(!val('fullName') || !val('phoneNumber')){
+    showError('error-1', 'Please fill in your name and phone number before continuing.');
+    return;
+  }
+  if(radioVal('delivery') !== 'Dropping it off myself' && !val('address')){
+    showError('error-1', 'Please add your address so we can arrange the courier.');
+    return;
+  }
+  goToStep(2);
+}
+
+function tryStep3(){
+  clearError('error-2');
+  if(!val('model')){
+    showError('error-2', 'Please tell us your phone model before continuing.');
+    return;
+  }
+  goToStep(3);
+}
+
+function tryStep4(){
+  clearError('error-3');
+  const notSure = document.getElementById('notSure').checked;
+  if(!notSure && !val('problem')){
+    showError('error-3', "Please describe the problem, or tick the box if you're not sure what's wrong.");
+    return;
+  }
+  goToStep(4);
+}
+
+function tryReview(){
+  clearError('error-4');
+  if(!document.getElementById('photosUploaded').checked){
+    showError('error-4', "Please upload your photos and tick the box to confirm before continuing.");
+    return;
+  }
+  showReview();
+}
+
+function showReview(){
+  const notSure = document.getElementById('notSure').checked;
+  const problem = notSure ? "Not sure, needs a tech to look at it" : (val('problem') || "Not answered");
+
+  const rows = [
+    ['Name', val('fullName') || 'Not answered'],
+    ['Phone', val('phoneNumber') || 'Not answered'],
+    ['Delivery', radioVal('delivery')],
+    ['Address', val('address') || 'Not needed / drop off in person'],
+    ['Device', radioVal('deviceType') + ' ' + (val('model') || '')],
+    ['Storage', val('storage') || 'Not answered'],
+    ['Problem', problem],
+    ['Photos uploaded', document.getElementById('photosUploaded').checked ? 'Yes' : 'Not yet, please go back and upload']
+  ];
+clearError('error-5');
+const submitBtn = document.getElementById('submitBtn');
+submitBtn.disabled = false;
+submitBtn.textContent = 'Send request';
+
+  const list = document.getElementById('reviewList');
+list.innerHTML = '';
+
+rows.forEach(r => {
+  const li = document.createElement('li');
+
+  const label = document.createElement('strong');
+  label.textContent = r[0] + ': ';
+
+  li.appendChild(label);
+  li.appendChild(document.createTextNode(r[1]));
+
+  list.appendChild(li);
+});
+
+  goToStep(5);
+}
+
+const REPAIR_FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaqbpoe";
+
+function buildRequestData(){
+  const notSure = document.getElementById('notSure').checked;
+  const problem = notSure ? "Not sure, needs a tech to look at it" : (val('problem') || "Not answered");
+
+  return {
+    fullName: val('fullName'),
+    phoneNumber: val('phoneNumber'),
+    delivery: radioVal('delivery'),
+    address: val('address') || 'N/A',
+    deviceType: radioVal('deviceType'),
+    model: val('model'),
+    storage: val('storage') || 'Not answered',
+    problem: problem,
+    photosUploaded: document.getElementById('photosUploaded').checked ? 'Yes' : 'No',
+    _subject: "Repair Request — " + radioVal('deviceType') + " " + val('model')
+  };
+}
+
+function mailtoFallback(data){
+  const body = "Name: " + data.fullName + "\n" +
+    "Phone: " + data.phoneNumber + "\n" +
+    "Delivery: " + data.delivery + "\n" +
+    "Address: " + data.address + "\n" +
+    "Device: " + data.deviceType + " " + data.model + " (" + data.storage + ")\n" +
+    "Problem: " + data.problem + "\n" +
+    "Photos: " + data.photosUploaded;
+
+  window.location.href = 'mailto:info@fivesdev.co.za?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
+}
+
+function submitRequest(){
+  clearError('error-5');
+  const data = buildRequestData();
+  const btn = document.getElementById('submitBtn');
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  fetch(REPAIR_FORMSPREE_ENDPOINT, {
+    method: "POST",
+    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Formspree error');
+    document.getElementById('successPhone').textContent = data.phoneNumber;
+    document.getElementById('reviewPanel').style.display = 'none';
+    document.getElementById('successPanel').style.display = 'block';
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send request';
+    showError('error-5', "Couldn't send automatically, opening your email app instead so you can send it that way.");
+    mailtoFallback(data);
+  });
+}
+</script>
+
+</body>
+</html>

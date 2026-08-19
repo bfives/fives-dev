@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /checkout.html
+Disallow: /payment.html
+Disallow: /payment-details.html
+Disallow: /order-success.html
+
+Sitemap: https://fivesdev.co.za/sitemap.xml

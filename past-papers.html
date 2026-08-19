@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>NSC Past Exam Papers, Fives Dev</title>
+<meta name="description" content="Search and browse Grade 12 NSC past exam papers and memos by subject and year, linking straight to the official Department of Basic Education portal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tools-additions.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<link rel="canonical" href="https://fivesdev.co.za/past-papers.html">
+<meta property="og:url" content="https://fivesdev.co.za/past-papers.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="NSC Past Exam Papers, Fives Dev">
+<meta property="og:description" content="Search and browse Grade 12 NSC past exam papers and memos by subject and year, linking straight to the official Department of Basic Education portal.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NSC Past Exam Papers, Fives Dev">
+<meta name="twitter:description" content="Search and browse Grade 12 NSC past exam papers and memos by subject and year, linking straight to the official Department of Basic Education portal.">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="blog.html" class="header-about">Insights</a>
+      <a href="tools.html" class="header-about">Free Tools</a>
+      <a href="about.html" class="header-about">About</a>
+
+  </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a href="tools.html" class="back-link">← Back to Free Tools</a>
+    <div style="text-align:center; max-width:680px; margin:0 auto;">
+      <span class="hero-badge"><span class="dot"></span> Grade 12 revision</span>
+      <h1 style="margin-top:16px;">NSC Past Exam Papers</h1>
+      <p style="margin-left:auto; margin-right:auto;">Search, filter and jump straight to question papers and memos from South Africa's Department of Basic Education, organised for focused revision.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+
+    <div class="tool-panel">
+      <div class="paper-filter-grid">
+        <label>
+          <span class="tool-field-label">Search</span>
+          <input type="search" class="tool-input" id="paperSearch" placeholder="e.g. Mathematics, 2022">
+        </label>
+        <label>
+          <span class="tool-field-label">Subject</span>
+          <select class="tool-select" id="paperSubject"></select>
+        </label>
+        <label>
+          <span class="tool-field-label">Year</span>
+          <select class="tool-select" id="paperYear"></select>
+        </label>
+      </div>
+      <p class="paper-result-count" id="paperResultCount"></p>
+    </div>
+
+    <div id="paperGroups"></div>
+
+    <div class="tool-panel soft-panel" style="margin-top:30px; font-size:14px; color:var(--muted);">
+      <strong style="color:var(--primary);">Note:</strong> Papers link to the official Department of Basic Education portal so you always get the latest official version and memo. This page is designed to grow, more years, subjects and paper languages will be added over time.
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+      <div class="foot-brand">Fives Dev</div>
+      <div>Your next step, sorted. · South Africa</div>
+      <div class="foot-links">
+        <a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const SUBJECTS = [
+    "Mathematics", "Mathematical Literacy", "Physical Sciences", "Life Sciences",
+    "English Home Language", "English First Additional Language", "Afrikaans First Additional Language",
+    "Accounting", "Business Studies", "Economics", "Geography", "History",
+    "Life Orientation", "Information Technology", "Computer Applications Technology", "Agricultural Sciences"
+  ];
+
+  // Official Department of Basic Education past papers portal.
+  const DBE = "https://www.education.gov.za/Curriculum/NationalSeniorCertificate(NSC)Examinations/PastExamPapers.aspx";
+
+  const DUAL_PAPER_SUBJECTS = ["Mathematics", "Physical Sciences", "Life Sciences", "Accounting", "Geography", "History", "Economics"];
+  const YEARS = [2023, 2022, 2021, 2020, 2019];
+
+  function buildPapers(){
+    const list = [];
+    SUBJECTS.forEach(subject => {
+      YEARS.forEach(year => {
+        const papers = DUAL_PAPER_SUBJECTS.includes(subject) ? ["Paper 1", "Paper 2"] : ["Paper 1"];
+        papers.forEach(paper => {
+          list.push({ subject, year, paper, questionUrl: DBE, memoUrl: DBE, language: "English" });
+        });
+      });
+    });
+    return list;
+  }
+
+  const ALL_PAPERS = [
+    { subject: 'Accounting', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Accounting/Accounting%20Nov%202019%20Eng.pdf?ver=2019-10-30-132507-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Accounting/Accounting%20Nov%202019%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-145020-000' },
+    { subject: 'Accounting', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Accounting%20NSC%20(2)/P1/Accounting%20P1%20NSC%20Nov%202020%20Eng%20(2).pdf?ver=2020-12-04-124743-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Accounting%20NSC/Accounting%20P1%20Nov%202020%20Memo%20Eng%20(2).pdf?ver=2021-03-10-122827-000' },
+    { subject: 'Accounting', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Accounting%20NSC%20(2)/P2/Accounting%20P2%20NSC%20Nov%202020%20Eng%20(2).pdf?ver=2020-12-07-144210-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Accounting%20NSC/Accounting%20P2%20Nov%202020%20Memo%20Eng%20(2).pdf?ver=2021-03-10-123702-000' },
+    { subject: 'Accounting', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Accounting/P1/Accounting%20P1%20Nov%202021%20Eng.pdf?ver=2022-02-09-112703-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Accounting/Accounting%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-09-114235-000' },
+    { subject: 'Accounting', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Accounting/P2/Accounting%20P2%20Nov%202021%20Eng.pdf?ver=2022-02-09-112912-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Accounting/Accounting%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-09-113742-000' },
+    { subject: 'Accounting', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Accounting/P1/Accounting%20P1%20Nov%202022%20Eng.pdf?ver=2023-02-12-131007-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Accounting/Accounting%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-093701-000' },
+    { subject: 'Accounting', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Accounting/P2/Accounting%20P2%20Nov%202022%20Eng.pdf?ver=2023-02-12-131344-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Accounting/Accounting%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-094023-000' },
+    { subject: 'Accounting', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Accounting/P1/Accounting%20P1%20Nov%202023%20Eng.pdf?ver=2024-01-24-094927-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Accounting/Accounting%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-092650-000' },
+    { subject: 'Accounting', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Accounting/P2/Accounting%20P2%20Nov%202023%20Eng.pdf?ver=2024-01-24-095722-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Accounting/Accounting%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-094035-000' },
+    { subject: 'Afrikaans First Additional Language', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202019.pdf?ver=2019-10-31-144139-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20Memos%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202019%20Memo.pdf?ver=2020-03-08-110739-000' },
+    { subject: 'Afrikaans First Additional Language', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202020.pdf?ver=2020-11-06-120638-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20Memo%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202020%20Memo.pdf?ver=2021-03-10-110947-000' },
+    { subject: 'Afrikaans First Additional Language', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202021.pdf?ver=2021-11-03-122004-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Afrikaans/FAL/AfrIkaans%20FAL%20P1%20Nov%202021%20MG.pdf?ver=2022-02-02-143515-000' },
+    { subject: 'Afrikaans First Additional Language', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202022.pdf?ver=2022-11-02-141449-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20MG%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202022%20MG.pdf?ver=2023-02-08-121555-000' },
+    { subject: 'Afrikaans First Additional Language', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Afrikaans%20FAL%20P1%20Nov%202023.pdf?ver=2025-03-19-152928-913', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Languages%20Nov%202023%20MG%20PDF/Afrikaans/FAL/Afrikaans%20FAL%20P1%20Nov%202023%20MG.pdf?ver=2024-02-19-090638-000' },
+    { subject: 'Agricultural Sciences', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202019%20Eng.pdf?ver=2019-11-15-135629-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-145313-000' },
+    { subject: 'Agricultural Sciences', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202020%20Eng.pdf?ver=2020-11-10-080030-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-124020-000' },
+    { subject: 'Agricultural Sciences', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-26-121434-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-095708-000' },
+    { subject: 'Agricultural Sciences', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-25-084523-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-094611-000' },
+    { subject: 'Agricultural Sciences', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202023%20Eng.pdf?ver=2023-11-24-125702-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Agricultural%20Sciences/Agricultural%20Sciences%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-114310-000' },
+    { subject: 'Business Studies', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Business%20Studies/Business%20Studies%20Nov%202019%20Eng.pdf?ver=2019-11-07-145228-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Business%20Studies/Business%20Studies%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-145930-000' },
+    { subject: 'Business Studies', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Business%20Studies%20NSC%20(2)/Business%20Studies%20P1%20NSC%20Nov%202020%20Eng.pdf?ver=2020-11-18-125035-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Business%20Studies%20NSC/Business%20Studies%20P1%20Nov%202020%20Eng.pdf?ver=2021-03-10-124459-000' },
+    { subject: 'Business Studies', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Business%20Studies%20NSC%20(2)/Business%20Studies%20P2%20NSC%20Nov%202020%20Eng%20(2).pdf?ver=2020-11-26-105550-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Business%20Studies%20NSC/Business%20Studies%20P2%20Nov%202020%20Eng.pdf?ver=2021-03-10-124618-000' },
+    { subject: 'Business Studies', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://drive.google.com/file/d/1ymsKSqahYE9t6k5L5yDYrf1MolV4WMbL/view', memoUrl: 'https://stanmorephysics.com/wp-content/uploads/2022/05/Business-Studies-NSC-Grade-12-NOV-2021-P1-and-Memo.pdf' },
+    { subject: 'Business Studies', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-10-123023-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-130255-000' },
+    { subject: 'Business Studies', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Business%20Studies/Business%20Studies%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-24-075020-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Business%20Studies/Business%20Studies%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-095242-000' },
+    { subject: 'Business Studies', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-30-071817-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-095615-000' },
+    { subject: 'Business Studies', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Business%20Studies/Business%20Studies%20P1%20Nov%202023%20Eng.pdf?ver=2023-11-10-140313-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Business%20Studies/Business%20Studies%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-23-084052-000' },
+    { subject: 'Business Studies', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202023%20Eng.pdf?ver=2023-11-14-071840-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Business%20Studies/Business%20Studies%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-23-090432-000' },
+    { subject: 'Computer Applications Technology', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Computer%20Applications%20Technology/Computer%20Application%20Technology%20P1%20Nov%202019%20Eng.pdf?ver=2019-10-16-145342-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Computer%20Applications%20Technology/Computer%20Application%20Technology%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-150326-000' },
+    { subject: 'Computer Applications Technology', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Computer%20Applications%20Technology/Computer%20Application%20Technology%20P1%20Nov%202020%20Eng.pdf?ver=2020-10-21-122434-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Computer%20Application%20Technology/Computer%20Application%20Technology%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-144142-000' },
+    { subject: 'Computer Applications Technology', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Computer%20Application%20Technology/Computer%20Application%20Technology%20P1%20Nov%202021%20Eng.pdf?ver=2025-03-24-143126-647', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Computer%20Application%20Technology/Computer%20Application%20Technology%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2025-03-24-142901-220' },
+    { subject: 'Computer Applications Technology', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Computer%20Applications%20Technology/Computer%20Applications%20Technology%20P1%20Nov%202022%20Eng.pdf?ver=2025-03-24-144651-317', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Computer%20Applications%20Technology/Computer%20Applications%20Technology%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2025-03-24-144329-967' },
+    { subject: 'Computer Applications Technology', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/CAT%20Changes/CAT%20NOVEMBER%202023/Computer%20Applications%20Technology%20P1%20Nov%202023%20Eng.pdf?ver=2023-10-24-133438-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/CAT%20Changes/CAT%20NOVEMBER%202023/Computer%20Applications%20Technology%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-125054-000' },
+    { subject: 'Economics', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Economics/Economics%20P1%20Nov%202019%20Eng.pdf?ver=2019-11-01-075001-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Economics/Economics%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-150529-000' },
+    { subject: 'Economics', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Economics/Economics%20P2%20Nov%202019%20Eng.pdf?ver=2019-11-14-141729-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Economics/Economics%20P2%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-150559-000' },
+    { subject: 'Economics', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Economics/Economics%20P1%20Nov%202020%20Eng.pdf?ver=2020-11-11-122706-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Economics/Economics%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-11-095707-000' },
+    { subject: 'Economics', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Economics/Economics%20P2%20Nov%202020%20Eng.pdf?ver=2020-11-19-125909-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Economics/Economics%20P2%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-11-112905-000' },
+    { subject: 'Economics', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Economics/Economics%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-09-120415-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Economics/Economics%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-10-092831-000' },
+    { subject: 'Economics', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Economics/Economics%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-18-123822-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Economics/Economics%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-10-093623-000' },
+    { subject: 'Economics', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Economics/Economics%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-01-144854-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Economics/Economics%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-105004-000' },
+    { subject: 'Economics', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Economics/Economics%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-09-072644-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Economics/Economics%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-105211-000' },
+    { subject: 'Economics', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Economics/Economics%20P1%20Nov%202023%20Eng.pdf?ver=2023-10-31-134528-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Economics/Economics%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-21-114621-000' },
+    { subject: 'Economics', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Economics/Economics%20P2%20Nov%202023%20Eng.pdf?ver=2023-11-08-073617-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Economics/Economics%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-21-114700-000' },
+    { subject: 'English First Additional Language', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20PDF/English/FAL/English%20FAL%20P1%20Nov%202019.pdf?ver=2019-10-23-141024-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20Memos%20PDF/English/FAL/English%20FAL%20P1%20Nov%202019%20Memo.pdf?ver=2020-03-08-131801-000' },
+    { subject: 'English First Additional Language', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20PDF/English/FAL/English%20FAL%20P1%20Nov%202020.pdf?ver=2020-11-05-122434-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20Memo%20PDF/English/FAL/English%20FAL%20P1%20Nov%202020%20Memo.pdf?ver=2021-03-10-113954-000' },
+    { subject: 'English First Additional Language', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20PDF/English/FAL/English%20FAL%20P1%20Nov%202021.pdf?ver=2021-10-27-123146-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20Marking%20Guidelines%20PDF/English/FAL/English%20FAL%20P1%20Nov%202021%20MG.pdf?ver=2022-02-02-144802-000' },
+    { subject: 'English First Additional Language', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20PDF/English/FAL/English%20FAL%20P1%20Nov%202022.pdf?ver=2022-10-31-133050-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20MG%20PDF/English/FAL/English%20FAL%20P1%20Nov%202022%20MG.pdf?ver=2023-02-08-124333-000' },
+    { subject: 'English First Additional Language', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Languages%20November%202023%20PDF/English/FAL/English%20FAL%20P1%20Nov%202023.pdf?ver=2023-10-30-132936-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Languages%20Nov%202023%20MG%20PDF/English/FAL/English%20FAL%20P1%20Nov%202023%20MG.pdf?ver=2024-02-19-085421-000' },
+    { subject: 'English Home Language', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20PDF/English/HL/English%20HL%20P1%20Nov%202019.pdf?ver=2019-10-23-141146-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Languages%20Nov%202019%20Memos%20PDF/English/HL/English%20HL%20P1%20Nov%202019%20Memo.pdf?ver=2020-03-08-131855-000' },
+    { subject: 'English Home Language', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20PDF/English/HL/English%20HL%20P1%20Nov%202020.pdf?ver=2020-11-06-072835-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Languages%20Nov%202020%20Memo%20PDF/English/HL/English%20HL%20P1%20Nov%202020%20Memo.pdf?ver=2021-03-10-114047-000' },
+    { subject: 'English Home Language', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20PDF/English/HL/English%20HL%20P1%20Nov%202021.pdf?ver=2021-10-27-123305-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Languages%20Nov%202021%20Marking%20Guidelines%20PDF/English/HL/English%20HL%20P1%20Nov%202021%20MG.pdf?ver=2022-02-02-144937-000' },
+    { subject: 'English Home Language', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20PDF/English/HL/English%20HL%20P1%20Nov%202022.pdf?ver=2022-10-31-133158-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Languages%20Nov%202022%20MG%20PDF/English/HL/English%20HL%20P1%20Nov%202022%20MG.pdf?ver=2023-02-08-130227-000' },
+    { subject: 'English Home Language', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Languages%20November%202023%20PDF/English/HL/English%20HL%20P1%20Nov%202023.pdf?ver=2023-10-30-133042-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Languages%20Nov%202023%20MG%20PDF/English/HL/English%20HL%20P1%20Nov%202023%20MG.pdf?ver=2024-02-19-085818-000' },
+    { subject: 'Geography', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Geography/P1/Geography%20P1%20Nov%202019%20Eng.pdf?ver=2019-11-05-144151-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Geography/Geography%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-152902-000' },
+    { subject: 'Geography', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Geography/P2/Geography%20P2%20Nov%202019%20Eng.pdf?ver=2019-11-06-073205-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Geography/Geography%20P2%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-152934-000' },
+    { subject: 'Geography', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Geography%20(2)/Geography%20P1%20Nov%202020%20Eng%20(2).pdf?ver=2020-12-03-130955-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Geography/Geography%20P1%20Nov%202020%20Memo%20Eng%20(2).pdf?ver=2021-03-10-145323-000' },
+    { subject: 'Geography', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Geography%20(2)/Geography%20P2%20Nov%202020%20Eng.pdf?ver=2020-12-04-074222-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Geography/Geography%20P2%20Nov%202020%20Memo%20Eng%20(2).pdf?ver=2021-03-10-145634-000' },
+    { subject: 'Geography', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Geography/Geography%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-12-074702-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Geography/Geography%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-10-102436-000' },
+    { subject: 'Geography', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Geography/Geography%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-18-074951-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Geography/Geography%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-10-102544-000' },
+    { subject: 'Geography', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Geography/Geography%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-15-134440-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Geography/Geography%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-110819-000' },
+    { subject: 'Geography', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Geography/Geography%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-23-072340-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Geography/Geography%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-110942-000' },
+    { subject: 'Geography', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Geography/Geography%20P1%20Nov%202023%20Eng.pdf?ver=2023-12-06-145047-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Geography/Geography%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-090516-000' },
+    { subject: 'Geography', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Geography/Geography%20P2%20Nov%202023%20Eng.pdf?ver=2023-11-22-072826-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Geography/Geography%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-090725-000' },
+    { subject: 'History', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/History/P1/History%20P1%20Nov%202019%20Eng.pdf?ver=2019-10-29-114557-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/History/History%20P1%20Nov%202019%20Memo%20Eng.pdf' },
+    { subject: 'History', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/History/P2/History%20P2%20Nov%202019%20Eng.pdf?ver=2019-11-26-074123-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/History/History%20P2%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-153059-000' },
+    { subject: 'History', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/History/History%20P1%20Nov%202020%20Eng.pdf?ver=2020-11-27-105506-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/History/History%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-144023-000' },
+    { subject: 'History', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/History/History%20P2%20Nov%202020%20Eng.pdf?ver=2020-12-01-125551-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/History/History%20P2%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-144244-000' },
+    { subject: 'History', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/History/P1/History%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-12-130059-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/History/History%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-142042-000' },
+    { subject: 'History', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/History/P2/History%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-24-074059-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/History/History%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-142149-000' },
+    { subject: 'History', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/History/P1/History%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-03-140046-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/History/History%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-111852-000' },
+    { subject: 'History', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/History/P2/History%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-10-134231-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/History/History%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-112011-000' },
+    { subject: 'History', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/History/P1/History%20P1%20Nov%202023%20Eng.pdf?ver=2023-11-02-130920-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/History/History%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-26-141704-000' },
+    { subject: 'History', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/History/P2/History%20P2%20Nov%202023%20Eng.pdf?ver=2023-11-08-134558-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/History/History%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-26-142052-000' },
+    { subject: 'Information Technology', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202019%20Eng.pdf?ver=2019-10-17-144110-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-08-153230-000' },
+    { subject: 'Information Technology', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202020%20Eng.pdf?ver=2020-10-22-112632-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-143351-000' },
+    { subject: 'Information Technology', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202021%20Eng.pdf?ver=2022-01-14-135550-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-134033-000' },
+    { subject: 'Information Technology', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202022%20Eng.pdf?ver=2022-10-27-074943-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-112607-000' },
+    { subject: 'Information Technology', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202023%20Eng.pdf?ver=2023-10-25-092944-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Information%20Technology/Information%20Technology%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-22-091858-000' },
+    { subject: 'Life Orientation', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Life%20Orientation/Life%20Orientation%20September202019%20Eng.pdf?ver=2019-09-02-142627-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Life%20Orientation/Life%20Orientation%20September%202019%20Memo%20Eng.pdf?ver=2019-09-02-142748-000' },
+    { subject: 'Life Orientation', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'COMING_SOON', memoUrl: 'https://online.htseden.co.za/wp-content/uploads/2021/08/Life-Orientation-November-2020-Eng-Memo-unlocked.pdf' },
+    { subject: 'Life Orientation', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Life%20Orientation/Life%20Orientation%20September%202021%20Eng.pdf?ver=2021-09-07-075737-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Life%20Orientation/Life% 20Orientation%20September%202021%20MG%20Eng.pdf?ver=2022-02-10-095851-000' },
+    { subject: 'Life Orientation', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Life%20Orientation/Life%20Orientation%20September%202022%20Eng.pdf?ver=2022-09-05-122846-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Life%20Orientation/Life%20Orientation%20September%202022%20MG%      20Eng.pdf?ver=2023-02-17-102550-000' },
+    { subject: 'Life Orientation', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Life%20Orientation/Life%20Orientation%20September%202023%20Eng.pdf?ver=2023-09-04-135738-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Life%20Orientation/Life%20Orientation%20September%202023%20MG%20Eng.pdf?ver=2024-02-24-121643-000' },
+    { subject: 'Life Sciences', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202019%20Eng.pdf?ver=2019-11-08-143021-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-20-141334-000' },
+    { subject: 'Life Sciences', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202019%20Eng.pdf?ver=2019-11-11-144832-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20Memos%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202019%20Memo%20Eng.pdf?ver=2020-03-20-141357-000' },
+    { subject: 'Life Sciences', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Life%20Sciences%20(2)/Life%20Sciences%20P1%20Nov%202020%20Eng%20(2).pdf?ver=2020-11-27-121058-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-142258-000' },
+    { subject: 'Life Sciences', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Life%20Sciences%20(2)/Life%20Sciences%20P2%20Nov%202020%20Eng%20(2).pdf?ver=2020-11-30-140149-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202020%20Memo%20Eng.pdf?ver=2021-03-10-142405-000' },
+    { subject: 'Life Sciences', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-19-121625-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-124130-000' },
+    { subject: 'Life Sciences', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-22-124915-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20Marking%20Guidelines%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202021%20MG%20Eng.pdf?ver=2022-02-02-130502-000' },
+    { subject: 'Life Sciences', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-18-124548-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-113020-000' },
+    { subject: 'Life Sciences', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-21-132132-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20MG%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202022%20MG%20Eng.pdf?ver=2023-02-12-113156-000' },
+    { subject: 'Life Sciences', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202023%20Eng.pdf?ver=2023-11-17-134527-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Life%20Sciences/Life%20Sciences%20P1%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-26-103137-000' },
+    { subject: 'Life Sciences', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202023%20Eng.pdf?ver=2023-11-20-125424-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20Nov%202023%20MG%20PDF/Life%20Sciences/Life%20Sciences%20P2%20Nov%202023%20MG%20Eng.pdf?ver=2024-02-26-103201-000' },
+    { subject: 'Mathematical Literacy', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Mathematical%20Literacy/P1/Mathematical%20Literacy%20P1%20Nov%202019%20Eng.pdf?ver=2020-01-29-125330-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=dpWXZuNLNsI%3d&tabid=2556&portalid=0&mid=8993' },
+    { subject: 'Mathematical Literacy', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Mathematical%20Literacy/Mathematical%20Literacy%20P1%20Nov%202020%20Eng.pdf?ver=2021-03-12-082352-000', memoUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20Memo%20PDF/Mathematical%20Literacy/Mathematical%20Literacy%20P1%20Nov%202020%20Memo%20Afr%20%20Eng.pdf?ver=2021-03-10-142122-000' },
+    { subject: 'Mathematical Literacy', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Mathematical%20Literacy/P1/Mathematical%20Literacy%20P1%20Nov%202021%20Eng.pdf?ver=2022-01-19-063734-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=7fBLcV06Hhc%3d&tabid=2922&portalid=0&mid=10134' },
+    { subject: 'Mathematical Literacy', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Mathematical%20Literacy/P1/Mathematical%20Literacy%20P1%20Nov%202022%20Eng.pdf?ver=2023-02-08-114604-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=1Wxd2X3KstA%3d&tabid=3294&portalid=0&mid=10985' },
+    { subject: 'Mathematical Literacy', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Mathematical%20Literacy/P1/Mathematical%20Literacy%20P1%20Nov%202023%20Eng.pdf?ver=2024-01-22-153024-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=2JxLqGZq7Cw%3d&tabid=4682&portalid=0&mid=12680' },
+    { subject: 'Mathematics', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Mathematics/P1/Mathematics%20P1%20Nov%202019%20Eng.pdf?ver=2020-01-29-125632-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=DtEIXt8fp_E%3d&tabid=2556&portalid=0&mid=8994' },
+    { subject: 'Mathematics', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Mathematics/P2/Mathematics%20P2%20Nov%202019%20Eng.pdf?ver=2020-01-29-125852-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=n-F98_w5Zig%3d&tabid=2556&portalid=0&mid=8994' },
+    { subject: 'Mathematics', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=FU-0n3tYUzs%3D&tabid=2702&portalid=0&mid=9632', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=P7kQcnNxRHY%3D&tabid=2702&portalid=0&mid=9632' },
+    { subject: 'Mathematics', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Mathematics/Mathematics%20P2%20Nov%202020%20Eng.pdf?ver=2021-03-12-082622-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=R9cpC35sw60%3D&tabid=2702&portalid=0&mid=9632' },
+    { subject: 'Mathematics', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Mathematics/Mathematics%20P1%20Nov%202021%20Eng.pdf?ver=2022-01-19-064250-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=LJo4MZ4DRZM%3d&tabid=2922&portalid=0&mid=10135' },
+    { subject: 'Mathematics', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Mathematics/Mathematics%20P2%20Nov%202021%20Eng.pdf?ver=2022-01-19-064118-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=s7hK0H8bqPM%3d&tabid=2922&portalid=0&mid=10135' },
+    { subject: 'Mathematics', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Mathematics/Mathematics%20P1%20Nov%202022%20Eng.pdf?ver=2023-02-02-114231-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=gytAGGPYSc8%3d&tabid=3294&portalid=0&mid=10986' },
+    { subject: 'Mathematics', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Mathematics/Mathematics%20P2%20Nov%202022%20Eng.pdf?ver=2023-02-08-132128-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=var8F7VpOmU%3d&tabid=3294&portalid=0&mid=10986' },
+    { subject: 'Mathematics', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Mathematics/P1/Mathematics%20P1%20Nov%202023%20Eng.pdf?ver=2024-01-22-153614-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=ViEtlf4659c%3d&tabid=4682&portalid=0&mid=12681' },
+    { subject: 'Mathematics', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Mathematics/P2/Mathematics%20P2%20Nov%202023%20Eng.pdf?ver=2024-01-22-153740-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=0RJSBcYBmhA%3d&tabid=4682&portalid=0&mid=12681' },
+    { subject: 'Physical Sciences', year: 2019, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Physical%20Sciences/Physical%20Sciences%20P1%20Nov%202019%20Eng.pdf?ver=2019-11-01-133329-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=LLMMn13si1c%3d&tabid=2556&portalid=0&mid=8990' },
+    { subject: 'Physical Sciences', year: 2019, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2019%20November%20past%20papers/Non-Languages%20Nov%202019%20PDF/Physical%20Sciences/Physical%20Sciences%20P2%20Nov%202019%20Eng.pdf?ver=2019-11-04-143821-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=mU3ifOrbHG8%3d&tabid=2556&portalid=0&mid=8990' },
+    { subject: 'Physical Sciences', year: 2020, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Physical%20Sciences/Physical%20Sciences%20P1%20Nov%202020%20Eng.pdf?ver=2020-12-02-115724-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=1MOdP9_gqm4%3d&tabid=2702&portalid=0&mid=9635' },
+    { subject: 'Physical Sciences', year: 2020, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2020%20NSC%20Exam%20papers/Non-Languages%20Nov%202020%20PDF/Physical%20Sciences/Physical%20Sciences%20P2%20Nov%202020%20Eng.pdf?ver=2020-11-23-135646-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=l5Q6JxAbkZ0%3d&tabid=2702&portalid=0&mid=9635' },
+    { subject: 'Physical Sciences', year: 2021, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Physical%20Sciences/Physical%20Sciences%20P1%20Nov%202021%20Eng.pdf?ver=2021-11-12-123424-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=VCtYr0giXYw%3d&tabid=2922&portalid=0&mid=10138' },
+    { subject: 'Physical Sciences', year: 2021, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2021NovemberExamPapers/Non-Languages%20Nov%202021%20PDF/Physical%20Sciences/Physical%20Sciences%20P2%20Nov%202021%20Eng.pdf?ver=2021-11-15-122849-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=gmvfHOKfxws%3d&tabid=2922&portalid=0&mid=10138' },
+    { subject: 'Physical Sciences', year: 2022, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Physical%20Sciences/Physical%20Sciences%20P1%20Nov%202022%20Eng.pdf?ver=2022-11-11-130647-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=1GNWZdT8oLQ%3d&tabid=3294&portalid=0&mid=10990' },
+    { subject: 'Physical Sciences', year: 2022, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2022NovExams/Non-Languages%20Nov%202022%20PDF/Physical%20Sciences/Physical%20Sciences%20P2%20Nov%202022%20Eng.pdf?ver=2022-11-14-123537-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=DFAi1wMTvCg%3d&tabid=3294&portalid=0&mid=10990' },
+    { subject: 'Physical Sciences', year: 2023, paper: 'Paper 1', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Physical%20Sciences/Physical%20Sciences%20P1%20Nov%202023%20Eng.pdf?ver=2023-11-10-130823-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=6g6X4xphO7I%3d&tabid=4682&portalid=0&mid=12685' },
+    { subject: 'Physical Sciences', year: 2023, paper: 'Paper 2', language: 'English', questionUrl: 'https://www.education.gov.za/Portals/0/CD/2023%20NovPapers/Non-Languages%20November%202023%20PDF/Physical%20Sciences/Physical%20Sciences%20P2%20Nov%202023%20Eng.pdf?ver=2023-12-06-145906-000', memoUrl: 'https://www.education.gov.za/LinkClick.aspx?fileticket=1JdWi95UKbY%3d&tabid=4682&portalid=0&mid=12685' },
+  ];
+
+  function populateSelect(id, options, allLabel){
+    const el = document.getElementById(id);
+    const allOpt = document.createElement('option');
+    allOpt.value = "All"; allOpt.textContent = allLabel || "All";
+    el.appendChild(allOpt);
+    options.forEach(o => {
+      const opt = document.createElement('option');
+      opt.value = o; opt.textContent = o;
+      el.appendChild(opt);
+    });
+  }
+  populateSelect('paperSubject', SUBJECTS);
+  populateSelect('paperYear', YEARS);
+
+  function renderResults(){
+    const subject = document.getElementById('paperSubject').value;
+    const year = document.getElementById('paperYear').value;
+    const query = document.getElementById('paperSearch').value.trim().toLowerCase();
+
+    const results = ALL_PAPERS.filter(p => {
+      if (subject !== "All" && p.subject !== subject) return false;
+      if (year !== "All" && String(p.year) !== year) return false;
+      if (query){
+        return p.subject.toLowerCase().includes(query) || p.paper.toLowerCase().includes(query) || String(p.year).includes(query);
+      }
+      return true;
+    });
+
+    document.getElementById('paperResultCount').textContent = results.length + ' paper' + (results.length === 1 ? '' : 's') + ' available';
+
+    const grouped = {};
+    results.forEach(p => {
+      if (!grouped[p.subject]) grouped[p.subject] = [];
+      grouped[p.subject].push(p);
+    });
+
+    const container = document.getElementById('paperGroups');
+    container.innerHTML = '';
+
+    if (Object.keys(grouped).length === 0){
+      const div = document.createElement('div');
+      div.className = 'no-matches';
+      div.style.marginTop = '24px';
+      div.textContent = 'No papers match your filters yet. Try widening your search.';
+      container.appendChild(div);
+      return;
+    }
+
+    Object.keys(grouped).forEach(subject => {
+      const papers = grouped[subject];
+      const groupDiv = document.createElement('div');
+      groupDiv.className = 'paper-subject-group';
+
+      const head = document.createElement('div');
+      head.className = 'paper-subject-head';
+      head.innerHTML = `<h3>${subject}</h3><span>${papers.length} papers</span>`;
+      groupDiv.appendChild(head);
+
+      const grid = document.createElement('div');
+      grid.className = 'paper-grid';
+      papers.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'paper-card';
+        card.innerHTML = `
+          <div class="paper-card-top">
+            <span class="paper-year-badge">${p.year}</span>
+            <span class="paper-lang">${p.language}</span>
+          </div>
+          <h4>${p.paper}</h4>
+          <div class="paper-card-actions">
+                      ${p.questionUrl === "COMING_SOON"
+                        ? `<span class="primary" style="opacity:.5; cursor:default;">Coming soon</span>`
+                        : `<a class="primary" href="${p.questionUrl}" target="_blank" rel="noopener">Question Paper</a>`}
+                      ${p.memoUrl === "COMING_SOON"
+                        ? `<span class="ghost" style="opacity:.5; cursor:default;">Coming soon</span>`
+                        : `<a class="ghost" href="${p.memoUrl}" target="_blank" rel="noopener">Memo</a>`}
+                    </div>
+        `;
+        grid.appendChild(card);
+      });
+      groupDiv.appendChild(grid);
+      container.appendChild(groupDiv);
+    });
+  }
+
+  document.getElementById('paperSubject').addEventListener('change', renderResults);
+  document.getElementById('paperYear').addEventListener('change', renderResults);
+  document.getElementById('paperSearch').addEventListener('input', renderResults);
+
+  renderResults();
+</script>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  const nav = document.getElementById('headerLinks');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+</script>
+
+</body>
+</html>

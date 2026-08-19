@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+<title>Creator, Fives Dev</title>
+<meta name="description" content="About Bayede Mthethwa, founder of Fives Dev — writer on education, careers, technology and entrepreneurship in South Africa.">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Bayede Mthethwa — Founder, Fives Dev">
+<meta property="og:description" content="Founder of Fives Dev. Writing about education, careers, technology and entrepreneurship in South Africa.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bayede Mthethwa — Founder, Fives Dev">
+<meta name="twitter:description" content="Founder of Fives Dev. Writing about education, careers, technology and entrepreneurship.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Bayede Mthethwa",
+  "jobTitle":"Founder, Fives Dev",
+  "worksFor":{"@type":"Organization","name":"Fives Dev"},
+  "description":"Founder of Fives Dev. Writing about education, careers, technology and entrepreneurship in South Africa."
+}
+</script>
+
+<style>
+  :root{
+    --primary:#124A3D;
+    --primary-light:#1C6E58;
+    --accent:#F2B705;
+    --accent-dark:#B98600;
+    --bg:#FFFFFF;
+    --bg-soft:#F4F7F5;
+    --text:#1E2422;
+    --muted:#5C6864;
+    --border:#E1E7E3;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+  }
+  h1,h2,h3{ font-family:'Poppins',sans-serif; margin:0; }
+  a{ color:inherit; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
+
+  header{ border-bottom:1px solid var(--border); }
+  .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-mark{
+    width:40px; height:40px; border-radius:9px; background:var(--primary);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Poppins',sans-serif; font-weight:800; font-size:13px; color:var(--accent);
+  }
+  .brand-name{ font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; color:var(--text); }
+  .brand-name span{ color:var(--primary-light); }
+  nav{ display:flex; gap:32px; }
+  nav a{
+    text-decoration:none; font-size:13px; font-weight:700; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  nav a:hover{ color:var(--primary); }
+
+  main{ background:linear-gradient(180deg, var(--bg-soft), #fff 420px); }
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:15px; font-weight:600; text-decoration:none; color:var(--primary);
+    padding:32px 0 24px;
+  }
+
+  .profile-row{ display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap; padding-bottom:36px; }
+  .avatar{
+    width:180px; height:180px; border-radius:20px; background:var(--primary);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-family:'Poppins',sans-serif; font-weight:800; font-size:52px; color:var(--accent);
+  }
+  .profile-info{ flex:1; min-width:280px; padding-top:4px; }
+  .profile-info h1{ font-size:40px; color:var(--primary); margin-bottom:10px; }
+  .role-line{ font-size:15px; color:var(--muted); margin-bottom:16px; }
+  .role-line .dot{ margin:0 8px; opacity:.5; }
+  .bio{ font-size:16px; line-height:1.65; color:var(--text); max-width:70ch; margin-bottom:22px; }
+
+  .profile-actions{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .contact-btn{
+    background:var(--primary); color:#fff; text-decoration:none;
+    font-weight:700; font-size:15px; padding:12px 22px; border-radius:8px;
+    transition:background .15s ease;
+  }
+  .contact-btn:hover{ background:var(--primary-light); }
+  .social-links{ display:flex; gap:10px; }
+  .social-links a{
+    width:38px; height:38px; border-radius:999px; border:1px solid var(--border);
+    background:#fff; color:var(--primary);
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none; font-size:15px; transition:all .15s ease;
+  }
+  .social-links a:hover{ background:var(--primary); color:#fff; border-color:var(--primary); }
+
+  section.block{ padding:36px 0; border-top:1px solid var(--border); }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  h2.block-title{ font-size:22px; color:var(--primary); margin-bottom:18px; }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tag-row span{
+    display:inline-block; background:#fff; border:1px solid var(--border);
+    padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600; color:var(--text);
+  }
+
+  .article-list{ list-style:none; margin:0; padding:0; }
+  .article-list li{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:16px 0; border-bottom:1px solid var(--border);
+  }
+  .article-list li:last-child{ border-bottom:none; }
+  .article-list a{
+    font-size:16px; font-weight:600; text-decoration:none; color:var(--primary);
+  }
+  .article-list a:hover{ color:var(--primary-light); }
+  .article-list .when{ font-size:14px; color:var(--muted); white-space:nowrap; flex-shrink:0; }
+
+  footer{ background:var(--bg-soft); border-top:1px solid var(--border); }
+  .footer-grid{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:32px;
+    max-width:1080px; margin:0 auto; padding:44px 24px 26px;
+  }
+  .footer-brand-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .footer-grid p{ font-size:14.5px; color:var(--muted); max-width:34ch; margin:0; }
+  .footer-grid h4{ font-size:15px; color:var(--primary); margin-bottom:14px; }
+  .footer-grid ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid ul a{ color:var(--primary-light); font-size:14.5px; text-decoration:none; }
+  .footer-grid ul a:hover{ color:var(--primary); }
+  .footer-grid .contact-col ul a{ color:var(--muted); }
+  .footer-bottom{
+    border-top:1px solid var(--border); max-width:1080px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    padding:16px 24px; font-size:13px; color:var(--muted);
+  }
+  .footer-bottom-links{ display:flex; gap:18px; }
+  .footer-bottom-links a{ color:var(--muted); text-decoration:none; }
+  .footer-bottom-links a:hover{ color:var(--primary); }
+
+  @media (max-width:720px){
+    .two-col{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .profile-row{ flex-direction:column; }
+  }
+
+.nav-toggle{
+  display:none;
+  background:none; border:none; cursor:pointer;
+  width:40px; height:40px; align-items:center; justify-content:center;
+  color:var(--primary);
+}
+@media (max-width:820px){
+  .header-inner{ position:relative; }
+  .nav-toggle{ display:flex; }
+  nav{
+    display:none;
+    position:absolute; top:100%; left:0; right:0;
+    background:#fff; border-bottom:1px solid var(--border);
+    flex-direction:column; align-items:center; gap:0; padding:8px 24px 16px;
+    box-shadow:0 12px 24px rgba(0,0,0,0.08);
+    z-index:60;
+  }
+  nav.open{ display:flex; }
+  nav a{ padding:12px 0; border-bottom:1px solid var(--border); }
+  nav a:last-child{ border-bottom:none; }
+}
+
+@media (max-width: 820px) {
+  header .header-inner {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+</style>
+<link rel="canonical" href="https://fivesdev.co.za/author.html">
+<meta property="og:url" content="https://fivesdev.co.za/author.html">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav id="siteNav">
+      <a href="blog.html">Insights</a>
+      <a href="tools.html">Free Tools</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <a href="blog.html" class="back-link">← Back to Insights</a>
+
+    <div class="profile-row">
+      <div class="avatar">BM</div>
+      <div class="profile-info">
+        <h1>Bayede Mthethwa</h1>
+        <div class="role-line">
+          Founder, Fives Dev<span class="dot">•</span>IT Student<span class="dot">•</span>Web Developer<span class="dot">•</span>Business Systems Analyst
+        </div>
+        <p class="bio">
+         Hi, I'm Bayede Mthethwa, founder of Fives Dev. I created Fives Dev to help South African students, graduates and small businesses through practical digital services, educational resources and technology. I enjoy working with tech and turning ideas into practical solutions for education and small business growth, with the goal of making complex topics easier to understand.
+        </p>
+        <div class="profile-actions">
+          <a href="https://wa.me/27810176811" class="contact-btn" target="_blank" rel="noopener">Contact Bayede</a>
+          <div class="social-links">
+            <a href="https://linkedin.com/in/bayede-mthethwa" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">in</a>
+            <a href="https://www.tiktok.com/@codewithfives" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">♪</a>
+            <a href="mailto:bayede.mthethwa5@gmail.com" aria-label="Email" title="Email">✉</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="block">
+      <div class="two-col">
+        <div>
+          <h2 class="block-title">Areas of expertise</h2>
+          <div class="tag-row">
+            <span>Information Systems</span>
+            <span>Web Development</span>  
+            <span>Business Systems</span>
+            <span>Database & SQL</span>
+            <span>IT Education</span>
+            <span>Technology</span>
+            <span>Entrepreneurship</span>
+          </div>
+        </div>
+        <div>
+          <h2 class="block-title">Categories written</h2>
+          <div class="tag-row">
+
+            <span>Opinion</span>
+            <span>Company News</span>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="block-title">Latest articles</h2>
+      <ul class="article-list">
+        <li><a href="article.html?slug=how-to-calculate-your-aps-score">How to Calculate Your APS Score (and Why It Matters)</a><span class="when">24 Jul 2026</span></li>
+        <li><a href="article.html?slug=why-every-graduate-should-build-a-linkedin-profile">Why Every Graduate Should Build a LinkedIn Profile</a><span class="when">22 Jul 2026</span></li>
+        <li><a href="article.html?slug=best-free-it-courses-in-2026">Best Free IT Courses in 2026 (With Real Certificates)</a><span class="when">19 Jul 2026</span></li>
+        <li><a href="article.html?slug=how-much-does-a-website-cost-in-south-africa">How Much Does a Website Cost in South Africa?</a><span class="when">17 Jul 2026</span></li>
+        <li><a href="article.html?slug=the-graduate-employment-crisis">The Graduate Employment Crisis: Why a Degree Is No Longer Enough</a><span class="when">15 Jul 2026</span></li>
+        <li><a href="article.html?slug=why-do-entry-level-jobs-require-experience">Why Do Entry-Level Jobs Require Experience?</a><span class="when">13 Jul 2026</span></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-row">
+        <div class="logo-mark">&lt;5&gt;</div>
+        <div class="brand-name">Fives <span>Dev</span></div>
+      </div>
+      <p>A South African studio building premium websites, tools and resources for students, founders and small businesses.</p>
+    </div>
+    <div>
+      <h4>Free tools</h4>
+      <ul>
+        <li><a href="aps-calculator.html">APS Calculator</a></li>
+        <li><a href="past-papers.html">NSC Past Papers</a></li>
+        <li><a href="budget-planner.html">Budget Planner</a></li>
+      </ul>
+    </div>
+    <div class="contact-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@fivesdev.co.za">info@fivesdev.co.za</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span id="fd-year-text">© 2026 Fives Dev. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('fd-year-text').textContent = '© ' + new Date().getFullYear() + ' Fives Dev. All rights reserved.';
+</script>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  const nav = document.getElementById('siteNav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+</script>
+
+</body>
+</html>

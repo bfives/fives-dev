@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>Payment instructions, Fives Dev</title>
+<meta name="description" content="Complete your Fives Dev booking with a direct bank transfer. Use your unique Order ID as the payment reference.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fivesdev.co.za/payment.html">
+<meta property="og:url" content="https://fivesdev.co.za/payment.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="Payment instructions, Fives Dev">
+<meta property="og:description" content="Complete your Fives Dev booking with a direct bank transfer. Use your unique Order ID as the payment reference.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Payment instructions, Fives Dev">
+<meta name="twitter:description" content="Complete your Fives Dev booking with a direct bank transfer. Use your unique Order ID as the payment reference.">
+</head>
+<body class="checkout-shell">
+
+<header class="checkout-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    <div class="step-tracker">
+      <span class="tick done" id="tick-1">✓</span><span class="label">Your details</span>
+      <span class="sep"></span>
+      <span class="tick active" id="tick-2">2</span><span class="label active">Payment</span>
+      <span class="sep"></span>
+      <span class="tick" id="tick-3">3</span><span class="label">Confirmation</span>
+    </div>
+  </div>
+</header>
+
+<main class="checkout-main" id="mainContent" style="display:none;">
+  <h1 style="font-size:clamp(28px,3.6vw,38px);">Payment instructions</h1>
+  <p style="max-width:62ch; color:var(--muted);">Please complete your payment via direct bank transfer using the details below. Use your Order ID as the payment reference so we can match your payment to your project.</p>
+
+  <div class="checkout-grid" style="margin-top:20px;">
+    <div class="checkout-col">
+
+      <div class="checkout-card">
+        <div class="orderid-block">
+          <div>
+            <div class="os-label">Your Order ID</div>
+            <div class="orderid-value" id="orderIdValue"></div>
+          </div>
+          <button type="button" class="copy-btn" id="copyOrderIdBtn">Copy Order ID</button>
+        </div>
+        <p class="orderid-note">
+          <strong>Important:</strong> use <span class="mono" id="orderIdInline"></span> as the payment reference so we can verify your booking.
+        </p>
+      </div>
+
+      <div class="checkout-card">
+        <h2>Bank details</h2>
+        <div class="bank-rows">
+          <div class="bank-row"><span class="bank-label">Bank</span><span class="bank-value"><span>First National Bank (FNB)</span><button type="button" class="copy-btn-sm" data-copy="First National Bank (FNB)">Copy</button></span></div>
+          <div class="bank-row"><span class="bank-label">Account name</span><span class="bank-value"><span>Fives Dev</span><button type="button" class="copy-btn-sm" data-copy="Fives Dev">Copy</button></span></div>
+          <div class="bank-row"><span class="bank-label">Account number</span><span class="bank-value"><span>63220934962</span><button type="button" class="copy-btn-sm" data-copy="63220934962">Copy</button></span></div>
+          <div class="bank-row"><span class="bank-label">Branch code</span><span class="bank-value"><span>250655</span><button type="button" class="copy-btn-sm" data-copy="250655">Copy</button></span></div>
+          <div class="bank-row"><span class="bank-label">Account type</span><span class="bank-value"><span>Cheque</span><button type="button" class="copy-btn-sm" data-copy="Cheque">Copy</button></span></div>
+          <div class="bank-row reference"><span class="bank-label">Reference</span><span class="bank-value"><span id="orderIdBankRow"></span><button type="button" class="copy-btn-sm" id="copyRefBtn">Copy</button></span></div>
+          <p class="note" style="margin-top:10px;">Please select "Immediate Payment" rather than a future-dated or scheduled EFT.</p>
+        </div>
+      </div>
+
+      <div class="checkout-card">
+        <h2>Next step: send proof of payment</h2>
+        <ol class="next-steps-list">
+          <li><strong>1.</strong> Make the transfer for <span id="amountInline"></span> using your Order ID as the reference.</li>
+          <li><strong>2.</strong> Email your proof of payment to <a href="#" id="paymentsEmailLink" style="font-weight:600;">payments@fivesdev.co.za</a>.</li>
+          <li><strong>3.</strong> Click the button below to confirm your order, we'll be in touch within 24 hours.</li>
+        </ol>
+        <div class="hero-actions" style="margin-top:20px;">
+          <a href="order-success.html" class="btn btn-primary">I've made the payment →</a>
+          <a href="checkout.html" class="btn btn-ghost">Edit details</a>
+        </div>
+      </div>
+
+    </div>
+
+    <aside>
+      <div class="order-sidebar">
+        <div class="os-label">Summary</div>
+        <div class="os-name" id="sumPackage"></div>
+        <p class="os-tagline" id="sumTagline"></p>
+        <dl class="os-rows">
+          <div class="os-row"><dt>Order ID</dt><dd id="sumOrderId" style="font-family:monospace;"></dd></div>
+          <div class="os-row"><dt>Name</dt><dd id="sumName"></dd></div>
+          <div class="os-row" id="sumBusinessRow" style="display:none;"><dt>Business</dt><dd id="sumBusiness"></dd></div>
+          <div class="os-row"><dt>Email</dt><dd id="sumEmail"></dd></div>
+          <div class="os-row"><dt>Delivery</dt><dd id="sumDelivery"></dd></div>
+        </dl>
+        <div class="os-total">
+          <span class="os-total-label">Amount due</span>
+          <span class="os-total-price" id="sumPrice"></span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="js/order.js"></script>
+<script>
+  const order = loadOrder();
+  if (!order) {
+    window.location.href = 'checkout.html';
+  } else {
+    const pkg = PACKAGES[order.packageId];
+
+    document.getElementById('orderIdValue').textContent = order.orderId;
+    document.getElementById('orderIdInline').textContent = order.orderId;
+    document.getElementById('orderIdBankRow').textContent = order.orderId;
+    document.getElementById('amountInline').textContent = pkg.price;
+    document.getElementById('paymentsEmailLink').href = 'mailto:payments@fivesdev.co.za?subject=' + encodeURIComponent('Proof of payment — ' + order.orderId);
+
+    document.getElementById('sumPackage').textContent = pkg.name;
+    document.getElementById('sumTagline').textContent = pkg.tagline;
+    document.getElementById('sumOrderId').textContent = order.orderId;
+    document.getElementById('sumName').textContent = order.fullName;
+    if (order.businessName) {
+      document.getElementById('sumBusinessRow').style.display = 'flex';
+      document.getElementById('sumBusiness').textContent = order.businessName;
+    }
+    document.getElementById('sumEmail').textContent = order.email;
+    document.getElementById('sumDelivery').textContent = pkg.delivery;
+    document.getElementById('sumPrice').textContent = pkg.price;
+
+    document.getElementById('mainContent').style.display = 'block';
+
+    function flashCopied(btn, originalText){
+      const prev = btn.textContent;
+      btn.textContent = originalText;
+      setTimeout(() => { btn.textContent = prev; }, 1500);
+    }
+
+    document.getElementById('copyOrderIdBtn').addEventListener('click', function(){
+      navigator.clipboard?.writeText(order.orderId);
+      flashCopied(this, 'Copied ✓');
+    });
+    document.getElementById('copyRefBtn').addEventListener('click', function(){
+      navigator.clipboard?.writeText(order.orderId);
+      flashCopied(this, 'Copied');
+    });
+    document.querySelectorAll('.copy-btn-sm[data-copy]').forEach(btn => {
+      btn.addEventListener('click', function(){
+        navigator.clipboard?.writeText(this.dataset.copy);
+        flashCopied(this, 'Copied');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

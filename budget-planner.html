@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>Monthly Budget Planner, Fives Dev</title>
+<meta name="description" content="Plan your monthly budget in Rands. Track income, rent, transport, groceries and savings, then print or save as PDF.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tools-additions.css">
+<link rel="stylesheet" href="css/agency-additions.css"> 
+<link rel="canonical" href="https://fivesdev.co.za/budget-planner.html">
+<meta property="og:url" content="https://fivesdev.co.za/budget-planner.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="Monthly Budget Planner, Fives Dev">
+<meta property="og:description" content="Plan your monthly budget in Rands. Track income, rent, transport, groceries and savings, then print or save as PDF.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Monthly Budget Planner, Fives Dev">
+<meta name="twitter:description" content="Plan your monthly budget in Rands. Track income, rent, transport, groceries and savings, then print or save as PDF.">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="blog.html" class="header-about">Insights</a>
+      <a href="tools.html" class="header-about">Free Tools</a>
+      <a href="about.html" class="header-about">About</a>
+   
+  </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a href="tools.html" class="back-link">← Back to Free Tools</a>
+    <div style="text-align:center; max-width:680px; margin:0 auto;">
+      <span class="hero-badge"><span class="dot"></span> Money made simple</span>
+      <h1 style="margin-top:16px;">Monthly Budget Planner</h1>
+      <p style="margin-left:auto; margin-right:auto;">Enter your income and monthly expenses to instantly see your total spend, remaining balance and savings rate. Print or save as PDF when you're done.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="tool-layout two-col">
+
+      <div class="tool-panel">
+        <label class="budget-income-field">
+          <span class="tool-field-label">Monthly income (R)</span>
+          <input type="number" class="tool-input" id="income" value="1716">
+        </label>
+
+        <div class="tool-panel-head" style="margin-top:20px;">
+          <h2>Expenses</h2>
+          <button type="button" class="tool-btn-add no-print" id="addExpenseBtn">+ Add row</button>
+        </div>
+
+        <div class="expense-table-head">
+          <span>Description</span><span>Category</span><span>Amount (R)</span><span></span>
+        </div>
+        <div id="expenseRows"></div>
+
+        <div class="budget-actions no-print">
+          <button type="button" class="btn btn-primary" id="printBtn">Print / Save as PDF</button>
+          <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="balance-box" id="balanceBox">
+          <div class="balance-label">Remaining balance</div>
+          <div class="balance-value" id="balanceValue">R0</div>
+          <p class="balance-msg" id="balanceMsg"></p>
+          <div class="balance-stats">
+            <div class="balance-stat"><span>Income</span><strong id="statIncome">R0</strong></div>
+            <div class="balance-stat"><span>Spent</span><strong id="statSpent">R0</strong></div>
+            <div class="balance-stat"><span>Savings</span><strong id="statSavings">0%</strong></div>
+          </div>
+        </div>
+
+        <div class="tool-panel" style="margin-top:20px;">
+          <h2>Where your money goes</h2>
+          <div id="categoryBreakdown" style="margin-top:12px;"></div>
+          <div class="budget-tip">
+            <strong style="color:var(--primary);">Rule of thumb:</strong> aim for housing under 30% of income, savings at least 10–15%, and keep debt repayments below 20%.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+      <div class="foot-brand">Fives Dev</div>
+      <div>Your next step, sorted. · South Africa</div>
+      <div class="foot-links">
+        <a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const CATEGORIES = ["Housing", "Transport", "Food", "Utilities", "Debt", "Savings", "Other"];
+  const CATEGORY_COLORS = {
+    Housing: "#124a3d", Transport: "#1c6e58", Food: "#2f8f74",
+    Utilities: "#5cae94", Debt: "#b98600", Savings: "#f2b705", Other: "#9aa8a3"
+  };
+
+  const DEFAULT_INCOME = 0;
+  const DEFAULT_EXPENSES = [
+    { id: "1", label: "Rent", amount: 0, category: "Housing" },
+    { id: "2", label: "Transport", amount: 0, category: "Transport" },
+    { id: "3", label: "Groceries", amount: 0, category: "Food" },
+    { id: "4", label: "Utilities (water & lights)", amount: 0, category: "Utilities" },
+    { id: "5", label: "Data / airtime", amount: 0, category: "Utilities" },
+    { id: "6", label: "Debt repayments", amount: 0, category: "Debt" },
+    { id: "7", label: "Savings goal", amount: 0, category: "Savings" }
+  ];
+
+  let expenses = JSON.parse(JSON.stringify(DEFAULT_EXPENSES));
+
+  function randId(){ return Math.random().toString(36).slice(2, 9); }
+  function formatR(n){ return "R" + Math.round(n).toLocaleString("en-ZA"); }
+
+  function renderExpenseRows(){
+    const container = document.getElementById('expenseRows');
+    container.innerHTML = '';
+    expenses.forEach((e, i) => {
+      const row = document.createElement('div');
+      row.className = 'expense-row';
+
+      const labelInput = document.createElement('input');
+      labelInput.type = 'text';
+      labelInput.className = 'tool-input';
+      labelInput.value = e.label;
+      labelInput.addEventListener('input', () => { expenses[i].label = labelInput.value; });
+
+      const catSelect = document.createElement('select');
+      catSelect.className = 'tool-select';
+      CATEGORIES.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c; opt.textContent = c;
+        if (c === e.category) opt.selected = true;
+        catSelect.appendChild(opt);
+      });
+      catSelect.addEventListener('change', () => { expenses[i].category = catSelect.value; recalc(); });
+
+      const amountInput = document.createElement('input');
+      amountInput.type = 'number';
+      amountInput.className = 'tool-input';
+      amountInput.value = e.amount;
+      amountInput.addEventListener('input', () => { expenses[i].amount = Number(amountInput.value) || 0; recalc(); });
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'tool-btn-remove no-print';
+      removeBtn.textContent = '✕';
+      removeBtn.setAttribute('aria-label', 'Remove');
+      removeBtn.addEventListener('click', () => { expenses.splice(i, 1); renderExpenseRows(); recalc(); });
+
+      row.appendChild(labelInput);
+      row.appendChild(catSelect);
+      row.appendChild(amountInput);
+      row.appendChild(removeBtn);
+      container.appendChild(row);
+    });
+  }
+
+  function recalc(){
+    const income = Number(document.getElementById('income').value) || 0;
+    const total = expenses.reduce((s, e) => s + (Number(e.amount) || 0), 0);
+    const remaining = income - total;
+    const savingsAmount = expenses.filter(e => e.category === "Savings").reduce((s, e) => s + e.amount, 0);
+    const savingsPct = income > 0 ? Math.round((savingsAmount / income) * 100) : 0;
+
+    document.getElementById('balanceValue').textContent = formatR(remaining);
+    document.getElementById('statIncome').textContent = formatR(income);
+    document.getElementById('statSpent').textContent = formatR(total);
+    document.getElementById('statSavings').textContent = savingsPct + '%';
+
+    const box = document.getElementById('balanceBox');
+    const overspend = remaining < 0;
+    const stretched = remaining >= 0 && remaining < income * 0.05;
+    box.classList.toggle('over-budget', overspend);
+
+    let msg;
+    if (overspend) msg = "⚠ Expenses exceed your income. Cut a category or increase income.";
+    else if (stretched) msg = "You're within budget but stretched thin. Consider trimming discretionary spend.";
+    else msg = "Healthy margin. Consider directing extra funds to savings or debt.";
+    document.getElementById('balanceMsg').textContent = msg;
+
+    const byCategory = {};
+    expenses.forEach(e => { byCategory[e.category] = (byCategory[e.category] || 0) + (Number(e.amount) || 0); });
+
+    const breakdown = document.getElementById('categoryBreakdown');
+    breakdown.innerHTML = '';
+    const activeCats = CATEGORIES.filter(c => (byCategory[c] || 0) > 0);
+
+    if (activeCats.length === 0){
+      breakdown.innerHTML = '<p style="color:var(--muted); font-size:14px;">Add expenses to see the breakdown.</p>';
+      return;
+    }
+
+    activeCats.forEach(c => {
+      const amount = byCategory[c] || 0;
+      const pct = total > 0 ? Math.round((amount / total) * 100) : 0;
+      const row = document.createElement('div');
+      row.className = 'category-row';
+      row.innerHTML = `
+        <div class="category-row-top">
+          <span class="cat-name">${c}</span>
+          <span class="cat-amount">${formatR(amount)} · ${pct}%</span>
+        </div>
+        <div class="category-bar-track">
+          <div class="category-bar-fill" style="width:${pct}%; background:${CATEGORY_COLORS[c]};"></div>
+        </div>
+      `;
+      breakdown.appendChild(row);
+    });
+  }
+
+  document.getElementById('income').addEventListener('input', recalc);
+  document.getElementById('addExpenseBtn').addEventListener('click', () => {
+    expenses.push({ id: randId(), label: "New expense", amount: 0, category: "Other" });
+    renderExpenseRows();
+    recalc();
+  });
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    expenses = JSON.parse(JSON.stringify(DEFAULT_EXPENSES));
+    document.getElementById('income').value = DEFAULT_INCOME;
+    renderExpenseRows();
+    recalc();
+  });
+
+  renderExpenseRows();
+  recalc();
+</script>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  const nav = document.getElementById('headerLinks');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+</script>
+
+</body>
+</html>

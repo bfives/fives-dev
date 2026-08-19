@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>APS Calculator & Qualification Checker, Fives Dev</title>
+<meta name="description" content="Calculate your South African NSC APS score and see which universities, colleges and qualifications you may qualify for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tools-additions.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<link rel="canonical" href="https://fivesdev.co.za/aps-calculator.html">
+<meta property="og:url" content="https://fivesdev.co.za/aps-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="APS Calculator & Qualification Checker, Fives Dev">
+<meta property="og:description" content="Calculate your South African NSC APS score and see which universities, colleges and qualifications you may qualify for.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="APS Calculator & Qualification Checker, Fives Dev">
+<meta name="twitter:description" content="Calculate your South African NSC APS score and see which universities, colleges and qualifications you may qualify for.">
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+      <div class="header-links" id="headerLinks">
+      <a href="blog.html" class="header-about">Insights</a>
+      <a href="tools.html" class="header-about">Free Tools</a>
+      <a href="about.html" class="header-about">About</a>
+
+  </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <a href="tools.html" class="back-link">← Back to Free Tools</a>
+    <div style="text-align:center; max-width:680px; margin:0 auto;">
+      <span class="hero-badge"><span class="dot"></span> Free student tool</span>
+      <h1 style="margin-top:16px;">APS Calculator & Qualification Checker</h1>
+      <p style="margin-left:auto; margin-right:auto;">Add your Grade 12 subjects to get your APS instantly, then filter South African universities and colleges by province, type and field of study.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="tool-layout two-col">
+
+      <div class="tool-panel">
+        <div class="tool-panel-head">
+          <h2>Your subjects</h2>
+          <button type="button" class="tool-btn-add" id="addSubjectBtn">+ Add subject</button>
+        </div>
+        <div id="subjectRows"></div>
+
+        <div class="aps-score-box">
+          <div class="aps-score-top">
+            <div>
+              <div class="aps-score-label">Your APS</div>
+              <div class="aps-score-value" id="apsValue">0</div>
+            </div>
+            <div class="aps-status-badge" id="apsStatusBadge">—</div>
+          </div>
+          <p class="aps-status-msg" id="apsStatusMsg"></p>
+          <p class="aps-note">Life Orientation is weighted at half points per common SA institution rules. Always confirm requirements with each institution.</p>
+        </div>
+      </div>
+
+      <div class="tool-panel soft-panel">
+        <h2>Qualification Checker</h2>
+        <p style="color:var(--muted); font-size:14.5px; margin-top:-8px;">Filter matching qualifications across South Africa.</p>
+
+        <div class="aps-filter-grid">
+          <label>
+            <span class="tool-field-label">Province</span>
+            <select class="tool-select" id="filterProvince"></select>
+          </label>
+          <label>
+            <span class="tool-field-label">Qualification type</span>
+            <select class="tool-select" id="filterType"></select>
+          </label>
+          <label>
+            <span class="tool-field-label">Field of study</span>
+            <select class="tool-select" id="filterField"></select>
+          </label>
+          <label>
+            <span class="tool-field-label">APS to check</span>
+            <input type="number" class="tool-input" id="manualAPS" min="0" max="49" disabled>
+          </label>
+        </div>
+        <div class="aps-toggle-row">
+          <label><input type="checkbox" id="useMyAPS" checked> Use my calculated APS</label>
+        </div>
+
+        <div class="aps-match-count">
+          <span id="matchCount">0 matches</span>
+          <span style="font-style:italic;">Sorted by minimum APS</span>
+        </div>
+
+        <div class="aps-results" id="qualResults"></div>
+      </div>
+
+    </div>
+
+    <div class="final-cta" style="margin-top:36px;">
+      <div>
+        <h2>Need help with your university applications?</h2>
+        <p>Fives Dev's application assistance service handles the paperwork and submissions, so you can focus on matric.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-accent" href="apply-assistance.html">Get application help →</a>
+        <a class="btn btn-outline-white" href="universities.html">View all universities</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+      <div class="foot-brand">Fives Dev</div>
+      <div>Your next step, sorted. · South Africa</div>
+      <div class="foot-links">
+        <a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a>
+        <a href="about.html">About</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  const SUBJECTS = [
+    "Home Language", "First Additional Language", "Mathematics", "Mathematical Literacy",
+    "Life Orientation", "Physical Sciences", "Life Sciences", "Geography", "History",
+    "Accounting", "Business Studies", "Economics", "Computer Applications Technology",
+    "Information Technology", "Engineering Graphics & Design", "Agricultural Sciences",
+    "Tourism", "Consumer Studies", "Dramatic Arts", "Visual Arts", "Music", "Other"
+  ];
+
+  const LEVEL_LABELS = {
+    7: "80–100% (Level 7)", 6: "70–79% (Level 6)", 5: "60–69% (Level 5)",
+    4: "50–59% (Level 4)", 3: "40–49% (Level 3)", 2: "30–39% (Level 2)", 1: "0–29% (Level 1)"
+  };
+
+  const PROVINCES = ["All", "Gauteng", "Western Cape", "KwaZulu-Natal", "Eastern Cape", "Free State", "Limpopo", "Mpumalanga", "North West", "Northern Cape"];
+  const TYPES = ["All", "Higher Certificate", "Diploma", "Degree"];
+  const FIELDS = ["All", "IT & Computer Science", "Engineering", "Commerce, Management & Accounting", "Health & Applied Sciences", "Education", "Humanities", "Humanities (Law)", "Agriculture Sciences"];
+
+  const QUALIFICATIONS = [
+    { institution: 'University of Pretoria', course: 'BSc Computer Science', type: 'Degree', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 30, duration: '3 Years', keySubjects: 'English 5, Math 6', careers: 'Software Engineer, AI Specialist, Data Analyst', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Information Technology', type: 'Diploma', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 26, duration: '3 Years', keySubjects: 'English 4, Math 5, Phys Sci 3', careers: 'IT Support, Network Technician, Web Developer', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'North-West University', course: 'BSc Information Technology', type: 'Degree', field: 'IT & Computer Science', province: 'North West', minAPS: 26, duration: '3 Years', keySubjects: 'English, Math 4', careers: 'Database Admin, Software Developer, Business Analyst', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'Durban University of Technology', course: 'Diploma in ICT in Applications Development', type: 'Diploma', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'English 4, Math 3 / Math Lit 6', careers: 'Full-Stack Developer, Mobile Developer, QA Tester', applyUrl: 'https://www.dut.ac.za' },
+    { institution: 'Stellenbosch University', course: 'B Data Science', type: 'Degree', field: 'IT & Computer Science', province: 'Western Cape', minAPS: 34, duration: '3 Years', keySubjects: 'English 6, Math 7', careers: 'Data Scientist, ML Engineer, Quant Analyst', applyUrl: 'https://www.sun.ac.za/english/apply' },
+    { institution: 'University of Johannesburg', course: 'BSc Computer Science & Informatics', type: 'Degree', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 30, duration: '3 Years', keySubjects: 'English 5, Math 6', careers: 'Systems Analyst, Software Developer, Cyber Analyst', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of the Witwatersrand', course: 'BSc Computer Science', type: 'Degree', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 36, duration: '3 Years', keySubjects: 'English 5, Math 6', careers: 'Software Engineer, Data Scientist, Algorithm Specialist', applyUrl: 'https://www.wits.ac.za/applications/' },
+    { institution: 'Central University of Technology', course: 'Diploma in IT (Software Development)', type: 'Diploma', field: 'IT & Computer Science', province: 'Free State', minAPS: 27, duration: '3 Years', keySubjects: 'English 4, Math 5', careers: 'Junior Software Developer, Web Developer', applyUrl: 'https://www.cut.ac.za' },
+    { institution: 'University of the Free State', course: 'BSc IT (CS & Information Systems)', type: 'Degree', field: 'IT & Computer Science', province: 'Free State', minAPS: 30, duration: '3 Years', keySubjects: 'English 4, Math 4', careers: 'Database Designer, Systems Analyst, IT Consultant', applyUrl: 'https://www.ufs.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in ICT (Applications Development)', type: 'Diploma', field: 'IT & Computer Science', province: 'Western Cape', minAPS: 26, duration: '3 Years', keySubjects: 'English 4, Math 3', careers: 'Mobile Developer, Front-End Developer', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Computer Systems Engineering', type: 'Diploma', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 26, duration: '3 Years', keySubjects: 'English 4, Math 5, Phys Sci 4', careers: 'Network Security Specialist, Cyber Analyst', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Pretoria', course: 'Bachelor of Information Technology (BIT)', type: 'Degree', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 30, duration: '3 Years', keySubjects: 'English 5, Math 5', careers: 'Enterprise IT Manager, Systems Architect', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'University of the Witwatersrand', course: 'BSc Mechanical Engineering', type: 'Degree', field: 'Engineering', province: 'Gauteng', minAPS: 42, duration: '4 Years', keySubjects: 'English 5, Math 5, Phys Sci 5', careers: 'Mechanical Engineer, Plant Manager', applyUrl: 'https://www.wits.ac.za/applications/' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Chemical Engineering', type: 'Diploma', field: 'Engineering', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4, Math 4 , Phys Sci 4', careers: 'Chemical Technician, Process Control Tech', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BEng Electrical & Electronic Engineering', type: 'Degree', field: 'Engineering', province: 'Gauteng', minAPS: 32, duration: '4 Years', keySubjects: 'Engl 5, Math 5, Phys Sci 5', careers: 'Electrical Engineer, Telecom Specialist', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Civil Engineering', type: 'Diploma', field: 'Engineering', province: 'Gauteng', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Civil Technician, Site Inspector', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'University of Cape Town', course: 'BSc Civil Engineering', type: 'Degree', field: 'Engineering', province: 'Western Cape', minAPS: 38, duration: '4 Years', keySubjects: 'Engl 5, Math 6, Physi Sci 6', careers: 'Structural Engineer, Transport Planner', applyUrl: 'https://www.uct.ac.za/apply' },
+    { institution: 'University of Cape Town', course: 'BSc Computer Engineering & Computer Sc', type: 'Degree', field: 'Engineering', province: 'Western Cape', minAPS: 34, duration: '3 Years', keySubjects: 'Engl 4, Math 6, Physi Sci 5', careers: 'Hardware Engineer, Embedded Systems Specialist', applyUrl: 'https://www.uct.ac.za/apply' },
+    { institution: 'Stellenbosch University', course: 'BEng Electrical & Electronic Engineering', type: 'Degree', field: 'Engineering', province: 'Western Cape', minAPS: 35, duration: '4 Years', keySubjects: 'Engl 5, Math 6, Physi Sci 5', careers: 'Power Systems Engineer, Control Engineer', applyUrl: 'https://www.sun.ac.za/english/apply' },
+    { institution: 'North-West University', course: 'BEng Chemical Engineering', type: 'Degree', field: 'Engineering', province: 'North West', minAPS: 34, duration: '4 Years', keySubjects: 'Engl 5, Math 6, Physi Sci 6', careers: 'Process Engineer, Environmental Engineer', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'Nelson Mandela University', course: 'BEng Mechatronics Engineering', type: 'Degree', field: 'Engineering', province: 'Eastern Cape', minAPS: 36, duration: '4 Years', keySubjects: 'Engl 4, Math 5, Phys Sci 5', careers: 'Robotics Developer, Automation Engineer', applyUrl: 'https://www.mandela.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Electrical Engineering', type: 'Diploma', field: 'Engineering', province: 'Western Cape', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Electrical Technician, Control Panel Designer', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Mechanical Engineering', type: 'Diploma', field: 'Engineering', province: 'Gauteng', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Mechanical Technician, CAD Drafter', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'University of the Witwatersrand', course: 'BSc Architectural Studies', type: 'Degree', field: 'Engineering', province: 'Gauteng', minAPS: 34, duration: '3 Years', keySubjects: 'Engl 4, Math 4', careers: 'Architectural Designer, Technologist', applyUrl: 'https://www.wits.ac.za/applications/' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Building Science', type: 'Diploma', field: 'Engineering', province: 'Gauteng', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 3, Phys Sci 3', careers: 'Construction Site Manager, Building Surveyor', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of the Free State', course: 'BSc Quantity Surveying', type: 'Degree', field: 'Engineering', province: 'Free State', minAPS: 34, duration: '3 Years', keySubjects: 'Engl 4, Math 5, Physl Sci / Acc 4', careers: 'Quantity Surveyor, Cost Consultant', applyUrl: 'https://www.ufs.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Surveying', type: 'Diploma', field: 'Engineering', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Topographic Surveyor, Engineering Surveyor', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'University of Pretoria', course: 'Bachelor of Town and Regional Planning (BTRP)', type: 'Degree', field: 'Engineering', province: 'Gauteng', minAPS: 27, duration: '4 Years', keySubjects: 'Engl 5, Math 4', careers: 'Town Planner, Spatial Data Analyst', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Industrial Design', type: 'Diploma', field: 'Engineering', province: 'Gauteng', minAPS: 21, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 4', careers: 'Quality Engineer, Production Planner', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BEngTech in Civil Engineering', type: 'Degree', field: 'Engineering', province: 'Gauteng', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 5, Phys Sci 4', careers: 'Civil Technologist, Site Manager', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'Sefako Makgatho Health Sciences University', course: 'MBChB (Medicine & Surgery)', type: 'Degree', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 38, duration: '6 Years', keySubjects: 'Eng 6, Math 6, Phys Sci 6, Life Sci 6', careers: 'General Practitioner, Medical Specialist', applyUrl: 'https://www.smu.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Bachelor of Nursing', type: 'Degree', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 5, Math 4, Life Sci 4, Phys Sci 4', careers: 'Professional Nurse, Clinical Educator', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'Rhodes University', course: 'Bachelor of Pharmacy (BPharm)', type: 'Degree', field: 'Health & Applied Sciences', province: 'Eastern Cape', minAPS: 36, duration: '4 Years', keySubjects: 'Math 6, Phys Sci 6, Life Sci 6', careers: 'Pharmacist, Industrial Researcher', applyUrl: 'https://www.ru.ac.za' },
+    { institution: 'University of the Free State', course: 'Bachelor of Biokinetics', type: 'Degree', field: 'Health & Applied Sciences', province: 'Free State', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 5, Math 4, Life Sci / Phys Sci 4', careers: 'Biokineticist, Sports Rehab Specialist', applyUrl: 'https://www.ufs.ac.za' },
+    { institution: 'University of the Western Cape', course: 'BSc in Physiotherapy', type: 'Degree', field: 'Health & Applied Sciences', province: 'Western Cape', minAPS: 39, duration: '4 Years', keySubjects: 'Engl 4, Math 4 / Math lit 6, Phys Sci 4, Life Sci 4', careers: 'Physiotherapist, Sports Therapist', applyUrl: 'https://www.uwc.ac.za' },
+    { institution: 'Durban University of Technology', course: 'BHSc in Emergency Medical Care', type: 'Diploma', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci 4', careers: 'Paramedic, Emergency Care Practitioner', applyUrl: 'https://www.dut.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'BHSc Medical Laboratory Science', type: 'Degree', field: 'Health & Applied Sciences', province: 'Western Cape', minAPS: 38, duration: '4 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci 5', careers: 'Medical Lab Scientist, Pathologist Asst', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Dental Technology', type: 'Diploma', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 22, duration: '3 Years', keySubjects: 'Engl 4, Math 3 Phys Sci / Life Sci 3', careers: 'Dental Technologist, Prosthetics Maker', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Cape Town', course: 'Bachelor of Occupational Therapy', type: 'Degree', field: 'Health & Applied Sciences', province: 'Western Cape', minAPS: 36, duration: '4 Years', keySubjects: 'Engl 5, Math 5, Phys Sci / Life Sci 5', careers: 'Occupational Therapist, Ergonomist', applyUrl: 'https://www.uct.ac.za/apply' },
+    { institution: 'Mangosuthu University of Technology', course: 'BSc Environmental Health', type: 'Degree', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 28, duration: '4 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4 / Life Sci  4', careers: 'Environmental Health Officer, OHS Inspector', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Biotechnology', type: 'Diploma', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 23, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Life Sci 4 / Phys Sci 4', careers: 'Lab Technician, Food Technologist', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Analytical Chemistry', type: 'Diploma', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 21, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Process Technician, Lab Analyst', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'North-West University', course: 'BCom Chartered Accountancy (CA)', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'North West', minAPS: 32, duration: '3 Years', keySubjects: 'Engl 4, Math 5', careers: 'Chartered Accountant, Auditor', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BCom in Accounting', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 4', careers: 'General Accountant, Internal Auditor', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of Pretoria', course: 'BCom Marketing Management', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 4', careers: 'Brand Manager, Marketing Strategist', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Operations Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Western Cape', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 3', careers: 'Productivity Analyst, Work Study Officer', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'University of Fort Hare', course: 'BCom Economics', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'Eastern Cape', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 5', careers: 'Economist, Investment Analyst', applyUrl: 'https://www.ufh.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Logistics and Supply Chain Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 20, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math lit 4', careers: 'Supply Chain Coordinator, Warehouse Manager', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Entrepreneurship', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Western Cape', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 2 / Math Lit 4, Business Stud / Economics 4', careers: 'Procurement Officer, Freight Forwarder', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Human Resource Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 3', careers: 'HR Officer, Talent Acquisition Specialist', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'Durban University of Technology', course: 'Diploma in Internal Auditing', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4, Math 4', careers: 'Internal Auditor, Compliance Officer', applyUrl: 'https://www.dut.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Diploma in Financial Services Operations', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 22, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 5 (24APS)', careers: 'Financial Systems Analyst, ERP Consultant', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of Pretoria', course: 'BCom Financial Management', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 32, duration: '3 Years', keySubjects: 'Engl 5, Math 5', careers: 'Financial Manager, Credit Analyst', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Retail Business Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Western Cape', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 2 / Math Lit 4, Business Stud 5', careers: 'Retail Store Manager, Buyer', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Diploma in Operations Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 20, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 5', careers: 'Operations Manager, Production Scheduler', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of the Witwatersrand', course: 'BSc Property Studies', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 36, duration: '3 Years', keySubjects: 'Engl 5, Math 5', careers: 'Property Portfolio Manager, Real Estate Valuer', applyUrl: 'https://www.wits.ac.za/applications/' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Marketing', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 21, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 4', careers: 'Marketing Assistant, Sales Representative', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Cost & Management Acc', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 22, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 5, Accounting 4', careers: 'Cost Clerk, Junior Management Accountant', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Public Relations Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Western Cape', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 5, Math 2 / Math Lit 4 (30APS)', careers: 'PR Officer, Corporate Communicator', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Administrative Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 4', careers: 'Office Manager, Administrative Coordinator', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of South Africa (UNISA)', course: 'Bachelor of Laws (LLB)', type: 'Degree', field: 'Humanities (Law)', province: 'Gauteng', minAPS: 20, duration: '4 Years', keySubjects: 'Engl 4', careers: 'Advocate, Attorney, Legal Advisor', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BCom Law', type: 'Degree', field: 'Humanities (Law)', province: 'Gauteng', minAPS: 31, duration: '3 Years', keySubjects: 'Engl 4, Math 4', careers: 'Corporate Legal Advisor, Compliance Specialist', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Admin', type: 'Degree', field: 'Humanities', province: 'KwaZulu-Natal', minAPS: 26, duration: '3 Years', keySubjects: 'English 4, Math 3', careers: 'Management analyst, marketing manager', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of Pretoria', course: 'BA Law', type: 'Degree', field: 'Humanities (Law)', province: 'Gauteng', minAPS: 34, duration: '3 Years', keySubjects: 'English 5', careers: 'Legal Researcher, Paralegal Analyst', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Nelson Mandela University', course: 'Bachelor of Laws (LLB)', type: 'Degree', field: 'Humanities (Law)', province: 'Eastern Cape', minAPS: 36, duration: '4 Years', keySubjects: 'Engl 6, Math 4', careers: 'Advocate, Labour Relations Officer', applyUrl: 'https://www.mandela.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Safety Management', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 20, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 4', careers: 'OHS Officer, Risk Assessor', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'University of South Africa (UNISA)', course: 'Diploma in Policing', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 18, duration: '3 Years', keySubjects: 'Engl  4', careers: 'SAPS Detective, Private Security Manager', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Public Affairs (Admin of State)', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 20, duration: '3 Years', keySubjects: 'Engl 3, Math 3 / Math Lit 3', careers: 'Public Administrator, Municipal Officer', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Pretoria', course: 'BAdmin in Public Administration', type: 'Degree', field: 'Humanities', province: 'Gauteng', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 5, Math 3 / Math Lit 4', careers: 'Public Sector Manager, Policy Advisor', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Public Affairs ((Local Government)', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 20, duration: '3 Years', keySubjects: 'Engl 3, Math 3 / Math Lit 3', careers: 'Municipal Officer, Community Coordinator', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of South Africa (UNISA)', course: 'Diploma in Safety Management', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 17, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 6', careers: 'Industrial Safety Inspector, Risk Officer', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'University of South Africa (UNISA)', course: 'Diploma in Correctional Management', type: 'Diploma', field: 'Humanities', province: 'Gauteng', minAPS: 18, duration: '3 Years', keySubjects: 'Engl 4', careers: 'Correctional Services Officer, Parole Analyst', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'University of Cape Town', course: 'BSc Biological Sciences', type: 'Degree', field: 'Health & Applied Sciences', province: 'Western Cape', minAPS: 36, duration: '3 Years', keySubjects: 'Engl 4, Math 6, Phys Sci 5', careers: 'Marine Biologist, Ecologist', applyUrl: 'https://www.uct.ac.za/apply' },
+    { institution: 'Sol Plaatje University', course: 'BSc Environmental Science', type: 'Degree', field: 'Health & Applied Sciences', province: 'Northern Cape', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 5, Math 5, Phys Sci 4 / Life Sci 4', careers: 'Environmental Assessor, GIS Specialist', applyUrl: 'https://www.spu.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BSc Geology', type: 'Degree', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 5, Math 5, Phys Sci 5, Life Sci 4', careers: 'Exploration Geologist, Hydrogeologist', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of the Western Cape', course: 'BSc Biotechnology', type: 'Degree', field: 'Health & Applied Sciences', province: 'Western Cape', minAPS: 33, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4 / Life Sci  4', careers: 'Biotechnologist, Geneticist', applyUrl: 'https://www.uwc.ac.za' },
+    { institution: 'Vaal University of Technology', course: 'Bachelor of Health Sciences: Medical Laboratory Science', type: 'Degree', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 27, duration: '4 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci  5', careers: 'Lab Analyst, Industrial Chemist', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'Durban University of Technology', course: 'BASc in Food Science & Technology', type: 'Degree', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci 4', careers: 'Food Quality Technologist, Product Developer', applyUrl: 'https://www.dut.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in ICT (Multimedia Computing)', type: 'Diploma', field: 'IT & Computer Science', province: 'Western Cape', minAPS: 28, duration: '3 Years', keySubjects: 'EngL 4, Math 3 / Math lit 5 (30APS)', careers: 'UI/UX Designer, Game Developer', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Logistics Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 3', careers: 'Logistics Coordinator', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Diploma in Geology', type: 'Diploma', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 21, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4', careers: 'Geological Technician, Core Logging Tech', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'Sol Plaatje University', course: 'BSc Data Science', type: 'Degree', field: 'IT & Computer Science', province: 'Northern Cape', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 5', careers: 'Data Analyst, ML Developer', applyUrl: 'https://www.spu.ac.za' },
+    { institution: 'North-West University', course: 'BSc Physics & Applied Mathematics', type: 'Degree', field: 'Health & Applied Sciences', province: 'North West', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 5, Phys Sci 4', careers: 'Quantitative Analyst, Research Physicist', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'University of Venda', course: 'BSc Biochemistry & Microbiology', type: 'Degree', field: 'Health & Applied Sciences', province: 'Limpopo', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci 4', careers: 'Microbiologist, Lab Researcher', applyUrl: 'https://www.univen.ac.za' },
+    { institution: 'North-West University', course: 'BEd Foundation Phase (Grades R–3)', type: 'Degree', field: 'Education', province: 'North West', minAPS: 26, duration: '4 Years', keySubjects: 'Language 4, Math 3 / Math Lit 4', careers: 'Foundation Phase School Teacher', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'University of the Free State', course: 'BEd Senior & FET Phase (Maths)', type: 'Degree', field: 'Education', province: 'Free State', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 4, Math 5', careers: 'High School Maths Educator', applyUrl: 'https://www.ufs.ac.za' },
+    { institution: 'Sol Plaatje University', course: 'BEd Intermediate Phase Teaching', type: 'Degree', field: 'Education', province: 'Northern Cape', minAPS: 30, duration: '4 Years', keySubjects: 'Language 4, Math 4, Phys Sci 4 / Life Sci 4', careers: 'Primary School Teacher (Grades 4-6)', applyUrl: 'https://www.spu.ac.za' },
+    { institution: 'Central University of Technology', course: 'BEd Foundation Phase Teaching', type: 'Degree', field: 'Education', province: 'Free State', minAPS: 27, duration: '4 Years', keySubjects: 'Language 4', careers: 'Grade R Educator, ECD Caretaker', applyUrl: 'https://www.cut.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'BEd Senior & FET Phase (Technical / EGD)', type: 'Degree', field: 'Education', province: 'Gauteng', minAPS: 24, duration: '4 Years', keySubjects: 'Engl 4, Math 4 / Tech subjects incl EGD 4', careers: 'Technical High School Educator', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BEd Senior & FET (Life Sciences)', type: 'Degree', field: 'Education', province: 'Gauteng', minAPS: 28, duration: '4 Years', keySubjects: 'Engl 6, Life Sci 4, Math 4 / Math lit 6', careers: 'High School Biology Teacher', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of Johannesburg', course: 'BA Strategic Communication', type: 'Degree', field: 'Humanities', province: 'Gauteng', minAPS: 27, duration: '3 Years', keySubjects: 'Engl 5', careers: 'Public Relations, Brand Strategist', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of Venda', course: 'Bachelor of Social Work (BSW)', type: 'Degree', field: 'Humanities', province: 'Limpopo', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 4', careers: 'Registered Social Worker, Probation Officer', applyUrl: 'https://www.univen.ac.za' },
+    { institution: 'University of Johannesburg', course: 'BA Politics, Economics & Tech', type: 'Degree', field: 'Humanities', province: 'Gauteng', minAPS: 27, duration: '3 Years', keySubjects: 'Engl 5, Math 4', careers: 'Policy Analyst, Tech Governance Specialist', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of Limpopo', course: 'BA Psychology and Sociology', type: 'Degree', field: 'Humanities', province: 'Limpopo', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 2 / Math Lit 4', careers: 'HR Assistant, Community Coordinator', applyUrl: 'https://www.ul.ac.za' },
+    { institution: 'Walter Sisulu University', course: 'Diploma in Journalism', type: 'Diploma', field: 'Humanities', province: 'Eastern Cape', minAPS: 21, duration: '3 Years', keySubjects: 'Engl 4', careers: 'Print/Digital Journalist, News Reporter', applyUrl: 'https://www.wsu.ac.za' },
+    { institution: 'North-West University', course: 'BSc Agric in Agricultural Economics', type: 'Degree', field: 'Agriculture Sciences', province: 'North West', minAPS: 26, duration: '4 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4 / Life Sci  4', careers: 'Agricultural Economist, Commodity Trader', applyUrl: 'https://www.nwu.ac.za' },
+    { institution: 'University of Mpumalanga', course: 'BSc Agric', type: 'Degree', field: 'Agriculture Sciences', province: 'Mpumalanga', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 4, Math 4 / Math lit 6, Phys Sci 4, Life Sci / Agric Sci 4', careers: 'Animal Scientist, Livestock Manager', applyUrl: 'https://www.ump.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Animal Production', type: 'Diploma', field: 'Agriculture Sciences', province: 'KwaZulu-Natal', minAPS: 26, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math Lit 4, Life Sci 4 / Agric Sci 4', careers: 'Livestock Farm Manager', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Pretoria', course: 'BVSc (Bachelor of Veterinary Science)', type: 'Degree', field: 'Agriculture Sciences', province: 'Gauteng', minAPS: 35, duration: '6 Years', keySubjects: 'Engl 5, Math 5, Phys Sci 5', careers: 'Veterinarian, Small/Large Animal Specialist', applyUrl: 'https://www.up.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Diploma in Nature Conservation', type: 'Diploma', field: 'Agriculture Sciences', province: 'Western Cape', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math lit 5, Life Sci 4', careers: 'Park Ranger, Wildlife Conservationist', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'BSc Computer Science & Information Technology', type: 'Degree', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 5, Phys Sci 4', careers: 'Software Developer, Data Analyst', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bcom (Accounting)', type: 'Degree', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 30, duration: '3 Years', keySubjects: 'Engl 4, Math 5', careers: 'Accountant, Business Analyst', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Laws (LLB)', type: 'Degree', field: 'Humanities (Law)', province: 'KwaZulu-Natal', minAPS: 32, duration: '4 Years', keySubjects: 'Engl 6, Math 3 / Math Lit 5', careers: 'Lawyer, Legal Advisor', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Nursing', type: 'Degree', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 30, duration: '4 Years', keySubjects: 'Engl 4, Math 3, Life Sci 4', careers: 'Professional Nurse', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Pharmacy', type: 'Degree', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 33, duration: '4 Years', keySubjects: 'Engl 4, Math 4, Phys Sci 4, Life Sci 4', careers: 'Pharmacist', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Education', type: 'Degree', field: 'Education', province: 'KwaZulu-Natal', minAPS: 28, duration: '4 Years', keySubjects: 'Engl 4, lvl5 o major subjects', careers: 'Teacher', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'BSc Civil Engineering', type: 'Degree', field: 'Engineering', province: 'KwaZulu-Natal', minAPS: 33, duration: '4 Years', keySubjects: 'Engl 4, Math 5, Phys Sci 5', careers: 'Civil Engineer', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of KwaZulu-Natal', course: 'Bachelor of Medicine & Bachelor of Surgery (MBChB)', type: 'Degree', field: 'Health & Applied Sciences', province: 'KwaZulu-Natal', minAPS: 42, duration: '6 Years', keySubjects: 'Engl 5, Math 5, Phys Sci 5, Life Sci 5', careers: 'Medical Doctor', applyUrl: 'https://applications.ukzn.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Higher Certificate in Information Technology', type: 'Higher Certificate', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 0, duration: '1 Year', keySubjects: 'English', careers: 'IT Support Technician', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of South Africa (UNISA)', course: 'Higher Certificate in Law', type: 'Higher Certificate', field: 'Humanities (Law)', province: 'Gauteng', minAPS: 15, duration: '1 Year', keySubjects: 'English 3', careers: '', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'Central University of Technology', course: 'Higher Certificate in Information Technology', type: 'Higher Certificate', field: 'IT & Computer Science', province: 'Free State', minAPS: 27, duration: '1 Year', keySubjects: 'English 4, Math 3 / Math lit 5', careers: 'IT Support', applyUrl: 'https://www.cut.ac.za' },
+    { institution: 'Cape Peninsula University of Technology', course: 'Higher Certificate in Information and Communication Technology', type: 'Higher Certificate', field: 'IT & Computer Science', province: 'Western Cape', minAPS: 24, duration: '1 Year', keySubjects: 'English 4, Math 3 / Math Lit 5 (26APS)', careers: 'ICT Technician', applyUrl: 'https://www.cput.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Higher Certificate in Business Management', type: 'Higher Certificate', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 20, duration: '1 Year', keySubjects: 'English 3, Math 3 / Math Lit 4 (22APS)', careers: 'Business Administrator', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'Vaal University of Technology', course: 'Diploma in Information Technology', type: 'Diploma', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 28, duration: '3 Years', keySubjects: 'English 4, Math4', careers: 'Data Analyst, Software Developer', applyUrl: 'https://www.vut.ac.za' },
+    { institution: 'University of Johannesburg', course: 'Diploma in Business Information Tech', type: 'Diploma', field: 'IT & Computer Science', province: 'Gauteng', minAPS: 22, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Math 6 (24APS)', careers: '', applyUrl: 'https://www.uj.ac.za/apply' },
+    { institution: 'University of South Africa (UNISA)', course: 'Higher Certificate in Economic & Management Sciences', type: 'Higher Certificate', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 15, duration: '1 Year', keySubjects: 'Engl 3', careers: '', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'University of South Africa (UNISA)', course: 'Higher Certificate in Education', type: 'Higher Certificate', field: 'Education', province: 'Gauteng', minAPS: 18, duration: '1 Year', keySubjects: 'Engl 3', careers: '', applyUrl: 'https://www.unisa.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Higher Certificate in Accounting', type: 'Higher Certificate', field: 'Commerce, Management & Accounting', province: 'Gauteng', minAPS: 22, duration: '1 Year', keySubjects: 'Engl 4, Math 3 / Math lit 4', careers: '', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Higher Certificate in Music', type: 'Higher Certificate', field: 'Humanities', province: 'Gauteng', minAPS: 18, duration: '1 Year', keySubjects: 'Engl 3', careers: '', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'Tshwane University of Technology', course: 'Higher Certificate in Water Care', type: 'Higher Certificate', field: 'Health & Applied Sciences', province: 'Gauteng', minAPS: 20, duration: '1 Year', keySubjects: 'Engl 3, Math 3, Phys Sci / Life Sci 3', careers: '', applyUrl: 'https://www.tut.ac.za' },
+    { institution: 'University of Mpumalanga', course: 'Diploma in Animal Production', type: 'Diploma', field: 'Agriculture Sciences', province: 'Mpumalanga', minAPS: 24, duration: '3 Years', keySubjects: 'Engl 4, Math 3, Phys Sci 3, Life Sci 4 / Agric Sci 4', careers: '', applyUrl: 'https://www.ump.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Co-operative Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 3, Math 3 / Math Lit 4', careers: 'Cooperative Manager, Business Administrator, Project Officer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Logistics Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 3, Math 3 / Math Lit 4', careers: 'Logistics Coordinator, Supply Chain Officer, Warehouse Manager', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Transport Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 3, Math 3 / Math Lit 4', careers: 'Transport Planner, Fleet Supervisor, Logistics Officer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Media Studies', type: 'Diploma', field: 'Humanities', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 4', careers: 'Journalist, Camera Operator, Media Producer, Communication Officer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'Diploma in Public Relations Management', type: 'Diploma', field: 'Humanities', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 4', careers: 'Public Relations Officer, Communications Officer, Marketing Assistant', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'BSc Computer Science with Mathematics', type: 'Degree', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'English 4, Mathematics 5, Physical Sciences 4', careers: 'Software Developer, Data Analyst, Systems Developer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'BSc Computer Science with Statistics', type: 'Degree', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'English 4, Mathematics 5, Physical Sciences 4', careers: 'Data Scientist, Statistician, Programmer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'BSc Computer Science with Physics', type: 'Degree', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 28, duration: '3 Years', keySubjects: 'English 4, Mathematics 5, Physical Sciences 4', careers: 'Software Engineer, Scientific Programmer', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'University of Zululand', course: 'Bachelor of Social Work', type: 'Degree', field: 'Humanities', province: 'KwaZulu-Natal', minAPS: 28, duration: '4 Years', keySubjects: 'Engl 5 & Four NSC subjects at 4+', careers: 'Social Worker, Community Development Officer, Welfare Practitioner', applyUrl: 'https://www.unizulu.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Information Technology', type: 'Diploma', field: 'IT & Computer Science', province: 'KwaZulu-Natal', minAPS: 24, duration: '3 Years', keySubjects: 'English 4, Math 3 / Maths Lit 5', careers: '', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Marketing', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4, Accounting 3, Math 3 / Maths Lit 4', careers: '', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Human Resource Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4, Math 3 / Maths Lit 4', careers: '', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Office Management & Technology', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4', careers: '', applyUrl: 'https://www.mut.ac.za' },
+    { institution: 'Mangosuthu University of Technology', course: 'Diploma in Public Management', type: 'Diploma', field: 'Commerce, Management & Accounting', province: 'KwaZulu-Natal', minAPS: 25, duration: '3 Years', keySubjects: 'Engl 4, Accounting 4, Math 3 / Maths Lit 4', careers: '', applyUrl: 'https://www.mut.ac.za' },
+  ];
+
+ let rows = [
+    { subject: "Home Language", level: 1 },
+    { subject: "First Additional Language", level: 1 },
+    { subject: "Mathematics", level: 1 },
+    { subject: "Life Orientation", level: 1 },
+    { subject: "Physical Sciences", level: 1 },
+    { subject: "Life Sciences", level: 1 },
+    { subject: "Geography", level: 1 }
+  ];
+
+ function renderSubjectRows(){
+    const container = document.getElementById('subjectRows');
+    container.innerHTML = '';
+    rows.forEach((row, i) => {
+      const wrapper = document.createElement('div');
+
+      const div = document.createElement('div');
+      div.className = 'subject-row';
+
+      const subjectSelect = document.createElement('select');
+      subjectSelect.className = 'tool-select';
+      SUBJECTS.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s; opt.textContent = s;
+        if (s === row.subject) opt.selected = true;
+        subjectSelect.appendChild(opt);
+      });
+      subjectSelect.addEventListener('change', () => {
+        rows[i].subject = subjectSelect.value;
+        renderSubjectRows();
+        recalculate();
+      });
+
+      const levelSelect = document.createElement('select');
+      levelSelect.className = 'tool-select';
+      [7,6,5,4,3,2,1].forEach(lv => {
+        const opt = document.createElement('option');
+        opt.value = lv; opt.textContent = LEVEL_LABELS[lv];
+        if (lv === row.level) opt.selected = true;
+        levelSelect.appendChild(opt);
+      });
+      levelSelect.addEventListener('change', () => { rows[i].level = Number(levelSelect.value); recalculate(); });
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'tool-btn-remove';
+      removeBtn.textContent = '✕';
+      removeBtn.setAttribute('aria-label', 'Remove subject');
+      removeBtn.addEventListener('click', () => { rows.splice(i, 1); renderSubjectRows(); recalculate(); });
+
+      div.appendChild(subjectSelect);
+      div.appendChild(levelSelect);
+      div.appendChild(removeBtn);
+      wrapper.appendChild(div);
+
+      if (row.subject === "Other"){
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.className = 'tool-input';
+        nameInput.placeholder = 'Type the subject name';
+        nameInput.style.marginTop = '-4px';
+        nameInput.style.marginBottom = '10px';
+        nameInput.value = row.customName || '';
+        nameInput.addEventListener('input', () => { rows[i].customName = nameInput.value; });
+        wrapper.appendChild(nameInput);
+      }
+
+      container.appendChild(wrapper);
+    });
+  }
+
+  function populateSelect(id, options){
+    const el = document.getElementById(id);
+    options.forEach(o => {
+      const opt = document.createElement('option');
+      opt.value = o; opt.textContent = o;
+      el.appendChild(opt);
+    });
+  }
+  populateSelect('filterProvince', PROVINCES);
+  populateSelect('filterType', TYPES);
+  populateSelect('filterField', FIELDS);
+
+  function currentAPS(){
+    const nonLO = rows.filter(r => r.subject !== "Life Orientation");
+    const best6 = [...nonLO].sort((a, b) => b.level - a.level).slice(0, 6);
+    let total = best6.reduce((sum, r) => sum + r.level, 0);
+
+    const lo = rows.find(r => r.subject === "Life Orientation");
+    if (lo && lo.level === 7) total += 1;
+
+    return total;
+  }
+
+  function recalculate(){
+    const aps = currentAPS();
+    document.getElementById('apsValue').textContent = aps;
+
+    let status;
+    if (aps >= 40) status = { label: "Excellent, top programmes are within reach.", tone: "GREAT" };
+    else if (aps >= 30) status = { label: "Solid, many degrees and diplomas match this score.", tone: "GOOD" };
+    else if (aps >= 23) status = { label: "Good foundation, diplomas and select degrees available.", tone: "OK" };
+    else status = { label: "Consider higher certificates or bridging programmes.", tone: "LOW" };
+
+    document.getElementById('apsStatusBadge').textContent = status.tone;
+    document.getElementById('apsStatusMsg').textContent = status.label;
+
+    const useMyAPS = document.getElementById('useMyAPS').checked;
+    const manualInput = document.getElementById('manualAPS');
+    manualInput.disabled = useMyAPS;
+    if (useMyAPS) manualInput.value = aps;
+
+    renderQualifications();
+  }
+
+  function renderQualifications(){
+    const province = document.getElementById('filterProvince').value;
+    const type = document.getElementById('filterType').value;
+    const field = document.getElementById('filterField').value;
+    const useMyAPS = document.getElementById('useMyAPS').checked;
+    const threshold = useMyAPS ? currentAPS() : (Number(document.getElementById('manualAPS').value) || 0);
+
+    const matches = QUALIFICATIONS.filter(q => {
+      if (province !== "All" && q.province !== province) return false;
+      if (type !== "All" && q.type !== type) return false;
+      if (field !== "All" && q.field !== field) return false;
+      return threshold >= q.minAPS;
+    }).sort((a, b) => b.minAPS - a.minAPS);
+
+    document.getElementById('matchCount').textContent = matches.length + ' match' + (matches.length === 1 ? '' : 'es') + ' at APS ' + threshold;
+
+    const container = document.getElementById('qualResults');
+    container.innerHTML = '';
+
+    if (matches.length === 0){
+      const div = document.createElement('div');
+      div.className = 'no-matches';
+      div.textContent = 'No matches. Try lowering filters or considering a Higher Certificate.';
+      container.appendChild(div);
+      return;
+    }
+
+    matches.forEach(q => {
+      const card = document.createElement('div');
+      card.className = 'qual-card';
+      card.innerHTML = `
+        <div class="qual-top">
+          <div>
+            <div class="qual-tag">${q.type} · ${q.field}</div>
+            <h3 class="qual-course">${q.course}</h3>
+            <p class="qual-meta">${q.institution} · ${q.province} · ${q.duration}</p>
+          </div>
+          <div class="qual-aps-badge">APS ${q.minAPS === 0 ? 'n/a' : q.minAPS}</div>
+        </div>
+        ${q.keySubjects ? `<p class="qual-meta" style="margin-top:8px;"><strong>Key subjects:</strong> ${q.keySubjects}</p>` : ''}
+        ${q.careers ? `<p class="qual-meta" style="margin-top:4px;"><strong>Careers:</strong> ${q.careers}</p>` : ''}
+        <a href="${q.applyUrl}" target="_blank" rel="noopener">Visit application page →</a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  document.getElementById('addSubjectBtn').addEventListener('click', () => {
+    rows.push({ subject: "Accounting", level: 1 });
+    renderSubjectRows();
+    recalculate();
+  });
+
+  document.getElementById('filterProvince').addEventListener('change', renderQualifications);
+  document.getElementById('filterType').addEventListener('change', renderQualifications);
+  document.getElementById('filterField').addEventListener('change', renderQualifications);
+  document.getElementById('useMyAPS').addEventListener('change', recalculate);
+  document.getElementById('manualAPS').addEventListener('input', renderQualifications);
+
+  renderSubjectRows();
+  recalculate();
+</script>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  const nav = document.getElementById('headerLinks');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+</script>
+
+</body>
+</html>

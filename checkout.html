@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+<title>Checkout, Fives Dev</title>
+<meta name="description" content="Book your Fives Dev website project. Share your details and continue to secure payment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agency-additions.css">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fivesdev.co.za/checkout.html">
+<meta property="og:url" content="https://fivesdev.co.za/checkout.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fives Dev">
+<meta property="og:title" content="Checkout, Fives Dev">
+<meta property="og:description" content="Book your Fives Dev website project. Share your details and continue to secure payment.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Checkout, Fives Dev">
+<meta name="twitter:description" content="Book your Fives Dev website project. Share your details and continue to secure payment.">
+</head>
+<body class="checkout-shell">
+
+<header class="checkout-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    <div class="step-tracker">
+      <span class="tick active" id="tick-1">1</span><span class="label active">Your details</span>
+      <span class="sep"></span>
+      <span class="tick" id="tick-2">2</span><span class="label">Payment</span>
+      <span class="sep"></span>
+      <span class="tick" id="tick-3">3</span><span class="label">Confirmation</span>
+    </div>
+  </div>
+</header>
+
+<main class="checkout-main">
+  <a href="web-development.html" class="back-link">← Back to Fives Dev</a>
+  <h1 style="font-size:clamp(28px,3.6vw,38px); margin-top:12px;">Book your project</h1>
+  <p style="max-width:60ch; color:var(--muted);">Tell us about your business and what you'd like your website to do. After this step you'll receive payment instructions.</p>
+
+  <form id="checkoutForm" class="checkout-grid" style="margin-top:20px;">
+    <div class="checkout-col">
+
+      <div class="checkout-card">
+        <h2>Select your package</h2>
+        <div class="pkg-picker" id="pkgPicker">
+          <button type="button" class="pkg-option" data-pkg="starter">
+            <div class="pkg-option-top"><span class="pkg-option-name">Starter</span><span class="pkg-option-dot"></span></div>
+            <span class="pkg-option-tagline">A polished one-page site to get you online fast.</span>
+            <span class="pkg-option-price">R1,500</span>
+          </button>
+          <button type="button" class="pkg-option" data-pkg="business">
+            <div class="pkg-option-top"><span class="pkg-option-name">Business</span><span class="pkg-option-dot"></span></div>
+            <span class="pkg-option-tagline">A multi-page site built to grow your business.</span>
+            <span class="pkg-option-price">R3,000</span>
+          </button>
+          <button type="button" class="pkg-option" data-pkg="ecommerce">
+            <div class="pkg-option-top"><span class="pkg-option-name">E-Commerce</span><span class="pkg-option-dot"></span></div>
+            <span class="pkg-option-tagline">A full online store engineered to sell.</span>
+            <span class="pkg-option-price">From R5,500</span>
+          </button>
+          <button type="button" class="pkg-option" data-pkg="custom">
+            <div class="pkg-option-top"><span class="pkg-option-name">Custom Quote</span><span class="pkg-option-dot"></span></div>
+            <span class="pkg-option-tagline">Bespoke builds, integrations and platforms.</span>
+            <span class="pkg-option-price">Let's talk</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="checkout-card">
+        <h2>Your details</h2>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Full name<span class="req">*</span></span>
+            <input type="text" id="fullName" required maxlength="200">
+          </label>
+          <label class="field">
+            <span class="field-label">Business name</span>
+            <input type="text" id="businessName" maxlength="200">
+          </label>
+          <label class="field">
+            <span class="field-label">Email address<span class="req">*</span></span>
+            <input type="email" id="email" required maxlength="200">
+          </label>
+          <label class="field">
+            <span class="field-label">Phone number<span class="req">*</span></span>
+            <input type="tel" id="phone" required maxlength="200">
+          </label>
+        </div>
+      </div>
+
+      <div class="checkout-card">
+        <h2>About your project</h2>
+        <div class="field-stack">
+          <label class="field">
+            <span class="field-label">Briefly describe your business<span class="req">*</span></span>
+            <textarea id="description" required maxlength="2000" placeholder="What you do, who you serve, and the goal for your website."></textarea>
+          </label>
+          <div class="field-grid">
+            <label class="field">
+              <span class="field-label">Preferred domain (optional)</span>
+              <input type="text" id="domain" maxlength="200" placeholder="e.g. yourbusiness.co.za">
+            </label>
+            <label class="field">
+              <span class="field-label">Preferred colours (optional)</span>
+              <input type="text" id="colors" maxlength="200" placeholder="e.g. deep green, cream, gold">
+            </label>
+          </div>
+          <label class="field">
+            <span class="field-label">Anything else we should know? (optional)</span>
+            <textarea id="notes" maxlength="2000" placeholder="Inspiration sites, existing branding, deadlines, integrations..."></textarea>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <aside>
+      <div class="order-sidebar">
+        <div class="os-label">Order summary</div>
+        <div class="os-name" id="osName">Business</div>
+        <p class="os-tagline" id="osTagline">A multi-page site built to grow your business.</p>
+        <dl class="os-rows">
+          <div class="os-row"><dt>Package</dt><dd id="osPackage">Business</dd></div>
+          <div class="os-row"><dt>Delivery</dt><dd id="osDelivery">7–10 business days</dd></div>
+          <div class="os-row"><dt>Revisions</dt><dd id="osRevisions">3 rounds of revisions</dd></div>
+        </dl>
+        <div class="os-total">
+          <span class="os-total-label">Total</span>
+          <span class="os-total-price" id="osPrice">R3,000</span>
+        </div>
+        <input type="text" id="company" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+        <p id="checkoutError" role="alert" style="display:none; margin-top:16px; padding:12px 14px; border-radius:10px; background:#fdecea; color:#8b1f14; font-size:14px; line-height:1.5;"></p>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px;">Continue to payment →</button>
+        <p class="os-submit-note">Secure booking · No payment charged yet</p>
+      </div>
+    </aside>
+  </form>
+</main>
+
+<script src="js/order.js"></script>
+<script>
+  let selected = "business";
+
+  function paramPackage(){
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get('package');
+    return (p && PACKAGES[p]) ? p : "business";
+  }
+
+  function renderSummary(){
+    const p = PACKAGES[selected];
+    document.getElementById('osName').textContent = p.name;
+    document.getElementById('osTagline').textContent = p.tagline;
+    document.getElementById('osPackage').textContent = p.name;
+    document.getElementById('osDelivery').textContent = p.delivery;
+    document.getElementById('osRevisions').textContent = p.revisions;
+    document.getElementById('osPrice').textContent = p.price;
+  }
+
+  function selectPackage(id){
+    selected = id;
+    document.querySelectorAll('.pkg-option').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.pkg === id);
+    });
+    renderSummary();
+  }
+
+  document.querySelectorAll('.pkg-option').forEach(btn => {
+    btn.addEventListener('click', () => selectPackage(btn.dataset.pkg));
+  });
+
+  selectPackage(paramPackage());
+
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xpqvyerk";
+  const GOOGLE_FORM_ID = "1FAIpQLSf0QY6mkPCsAbNDLEsQ6h1HawuTYV9T9_AL0SHxyYDIwfZoZg";
+  const GOOGLE_FORM_ENTRIES = {
+    orderId:      "entry.360092704",
+    packageName:  "entry.1610906108",
+    fullName:     "entry.40928650",
+    businessName: "entry.1486929564",
+    email:        "entry.1536867159",
+    phone:        "entry.615919586",
+    description:  "entry.1711944055",
+    domain:       "entry.1271812895",
+    colors:       "entry.1614461077",
+    notes:        "entry.868345683"
+  };
+
+  function notifyFormspree(data) {
+    // Returns a promise so the submit handler can tell the customer if it failed.
+    return fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+      keepalive: true
+    }).then((res) => {
+      if (!res.ok) throw new Error("Formspree error");
+      return res;
+    });
+  }
+
+  function notifyGoogleSheet(data) {
+    const body = new URLSearchParams();
+    body.append(GOOGLE_FORM_ENTRIES.orderId, data.orderId);
+    body.append(GOOGLE_FORM_ENTRIES.packageName, PACKAGES[data.packageId].name);
+    body.append(GOOGLE_FORM_ENTRIES.fullName, data.fullName);
+    body.append(GOOGLE_FORM_ENTRIES.businessName, data.businessName);
+    body.append(GOOGLE_FORM_ENTRIES.email, data.email);
+    body.append(GOOGLE_FORM_ENTRIES.phone, data.phone);
+    body.append(GOOGLE_FORM_ENTRIES.description, data.description);
+    body.append(GOOGLE_FORM_ENTRIES.domain, data.domain);
+    body.append(GOOGLE_FORM_ENTRIES.colors, data.colors);
+    body.append(GOOGLE_FORM_ENTRIES.notes, data.notes);
+
+    fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, {
+      method: "POST",
+      mode: "no-cors",
+      body: body,
+      keepalive: true
+    }).catch(() => {});
+  }
+
+  document.getElementById('checkoutForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = {
+      orderId: generateOrderId(),
+      packageId: selected,
+      fullName: document.getElementById('fullName').value.trim(),
+      businessName: document.getElementById('businessName').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      domain: document.getElementById('domain').value.trim(),
+      colors: document.getElementById('colors').value.trim(),
+      notes: document.getElementById('notes').value.trim(),
+      createdAt: new Date().toISOString()
+    };
+    if (document.getElementById('company').value) return; // honeypot: silently drop bots
+
+    const submitBtn = this.querySelector('button[type=submit]');
+    const errorBox = document.getElementById('checkoutError');
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    saveOrder(data);
+    notifyGoogleSheet(data);
+
+    notifyFormspree(data)
+      .then(() => {
+        window.location.href = 'payment.html';
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Continue to payment →';
+        errorBox.innerHTML = "We couldn't send your booking automatically. " +
+          '<a href="mailto:info@fivesdev.co.za?subject=' +
+          encodeURIComponent('Website booking — ' + data.orderId) +
+          '&body=' + encodeURIComponent(
+            'Order ID: ' + data.orderId + '\n' +
+            'Package: ' + PACKAGES[data.packageId].name + '\n' +
+            'Name: ' + data.fullName + '\n' +
+            'Business: ' + data.businessName + '\n' +
+            'Email: ' + data.email + '\n' +
+            'Phone: ' + data.phone + '\n' +
+            'Description: ' + data.description + '\n' +
+            'Domain: ' + data.domain + '\n' +
+            'Colours: ' + data.colors + '\n' +
+            'Notes: ' + data.notes
+          ) + '">Email your details to us instead</a> and we\'ll pick it up from there.';
+        errorBox.style.display = 'block';
+      });
+  });
+</script>

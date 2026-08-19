@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="manifest" href="images/site.webmanifest">
+
+<title>Insights | Fives Dev, Blog Careers, Education & Tech for South Africa</title>
+<meta name="description" content="Practical articles, career advice, technology trends, business ideas, university guidance and thoughtful opinions from Fives Dev — written to help you grow.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fives Dev Insights — Careers, Education & Tech for South Africa">
+<meta property="og:description" content="Practical articles, career advice, technology trends and business ideas from Fives Dev.">
+<meta property="og:site_name" content="Fives Dev">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fives Dev Insights">
+<meta name="twitter:description" content="Practical articles, career advice, technology trends and business ideas from Fives Dev.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/blog.css">
+<link rel="canonical" href="https://fivesdev.co.za/blog.html">
+<meta property="og:url" content="https://fivesdev.co.za/blog.html">
+</head>
+<body>
+
+<!-- HEADER (matches main site) -->
+<header>
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <div class="logo-mark">&lt;5&gt;</div>
+      <div class="brand-name">Fives <span>Dev</span></div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="blog.html" class="header-about" aria-current="page">Insights</a>
+      <a href="tools.html" class="header-about">Free Tools</a>
+      <a href="about.html" class="header-about">About</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="blog-hero">
+  <div class="wrap">
+    <span class="eyebrow">Fives Dev Insights</span>
+    <h1>Insights</h1>
+    <p class="lead">Explore practical articles, career advice, technology trends, business ideas, university guidance and thoughtful opinions written to help you grow.</p>
+
+    <label class="blog-search" for="blog-search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input id="blog-search" type="search" placeholder="Search articles..." autocomplete="off" aria-label="Search articles">
+      <button id="blog-search-clear" class="clear-btn" type="button" aria-label="Clear search">✕</button>
+    </label>
+
+    <div class="chip-row" id="blog-chips" role="tablist" aria-label="Filter by category"></div>
+  </div>
+</section>
+
+<!-- GRID -->
+<section class="grid-wrap">
+  <div class="wrap">
+    <div class="grid-head">
+      <h2>Latest articles</h2>
+      <span class="count" id="blog-count"></span>
+    </div>
+    <div class="article-grid" id="blog-grid"></div>
+  </div>
+</section>
+
+<!-- FOOTER (matches main site) -->
+<footer class="fd-footer">
+  <div class="fd-footer-grid">
+    <div>
+      <div class="fd-brand">
+        <div class="fd-logo">&lt;5&gt;</div>
+        <div class="fd-wordmark">Fives <span>Dev</span></div>
+      </div>
+      <p class="fd-tag">A South African studio building premium websites, tools and resources for students, founders and small businesses.</p>
+    </div>
+    <div>
+      <h4>Free tools</h4>
+      <ul>
+        <li><a href="aps-calculator.html">APS Calculator</a></li>
+        <li><a href="past-papers.html">NSC Past Papers</a></li>
+        <li><a href="budget-planner.html">Budget Planner</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul class="fd-muted">
+        <li><a href="mailto:info@fivesdev.co.za">info@fivesdev.co.za</a></li>
+        <li><a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a></li>
+        <li><a href="https://www.tiktok.com/@codewithfives" target="_blank" rel="noopener">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fd-bottom">
+    <span class="fd-bottom-spacer" aria-hidden="true"></span>
+    <div class="fd-copyright">
+      <span class="fd-copyright-spacer" aria-hidden="true"></span>
+      <span class="fd-copyright-text">© <span id="fd-year"></span> Fives Dev. All rights reserved.</span>
+      <div class="fd-legal-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/blog.js"></script>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', function(){
+  const nav = document.getElementById('headerLinks');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+});
+</script>
+
+</body>
+</html>
