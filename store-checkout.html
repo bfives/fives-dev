@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Fives Dev Tech Store</title>
+<meta name="description" content="Complete your Fives Dev Tech Store order.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/tech-store.css">
+</head>
+<body class="store-body">
+<div class="store-notice"><div class="store-notice-inner"><div class="store-notice-label">Fives Dev Tech Store <span class="notice-divider">·</span> South Africa</div><a class="track-order-top" href="track-your-order.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v11H3z"/><path d="M14 11h4l3 4v3h-7z"/><circle cx="7.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/><path d="M5 11h5M5 14h4"/></svg><span>Track your order</span></a></div></div>
+<header><div class="wrap header-inner">
+  <a href="index.html" class="brand"><div class="logo-mark">&lt;5&gt;</div><div class="brand-name">Fives <span>Dev</span></div></a>
+  <nav class="header-links" id="headerLinks" aria-label="Store navigation"><a href="tech-store.html#catalog" class="header-about">Shop</a><a href="tech-store.html#why" class="header-about">Why Us</a></nav>
+  <button class="top-cart" type="button" data-open-cart aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Cart <b data-cart-count>0</b></button>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</div></header>
+<main><div class="wrap">
+  <div class="co-wrap">
+    <form id="checkoutForm" novalidate>
+      <h1 style="font-family:Poppins,sans-serif;margin:0 0 12px">Checkout</h1>
+      <div class="co-steps"><span class="on" data-step="1">1. Your details</span><span data-step="2">2. Delivery</span><span data-step="3">3. Payment</span></div>
+      <section class="co-card" id="stepDetails">
+        <h2>Your details</h2><p>We'll send your order confirmation and tracking to this email.</p>
+        <div class="f-grid">
+          <div class="field"><label for="firstName">First name</label><input id="firstName" name="first_name" autocomplete="given-name" required maxlength="60"><div class="msg">Enter your first name</div></div>
+          <div class="field"><label for="lastName">Last name</label><input id="lastName" name="last_name" autocomplete="family-name" required maxlength="60"><div class="msg">Enter your last name</div></div>
+          <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="120"><div class="msg">Enter a valid email address</div></div>
+          <div class="field"><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 072 123 4567" required maxlength="20"><div class="msg">Enter a valid SA mobile number</div></div>
+        </div>
+      </section>
+      <section class="co-card" id="stepDelivery">
+        <h2>Delivery address</h2><p>Enter the delivery address for this order.</p>
+        <div class="f-grid">
+          <div class="field full"><label for="recipient">Recipient name (if different)</label><input id="recipient" name="recipient" autocomplete="name" maxlength="100"></div>
+          <div class="field full"><label for="address1">Street address</label><input id="address1" name="address_line_1" autocomplete="address-line1" placeholder="House number and street name" required maxlength="150"><div class="msg">Enter your street address</div></div>
+          <div class="field full"><label for="address2">Complex, building or unit (optional)</label><input id="address2" name="address_line_2" autocomplete="address-line2" maxlength="150"></div>
+          <div class="field"><label for="suburb">Suburb</label><input id="suburb" name="suburb" required maxlength="80"><div class="msg">Enter your suburb</div></div>
+          <div class="field"><label for="city">City / Town</label><input id="city" name="city" autocomplete="address-level2" required maxlength="80"><div class="msg">Enter your city or town</div></div>
+          <div class="field"><label for="province">Province</label><select id="province" name="province" required><option value="">Select province</option><option>Eastern Cape</option><option>Free State</option><option>Gauteng</option><option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Northern Cape</option><option>Western Cape</option></select><div class="msg">Select your province</div></div>
+          <div class="field"><label for="postal">Postal code</label><input id="postal" name="postal_code" inputmode="numeric" autocomplete="postal-code" required maxlength="4"><div class="msg">Enter a 4-digit postal code</div></div>
+          <div class="field full"><label for="addressType">Address type</label><select id="addressType" name="address_type"><option>Residential</option><option>Business</option></select></div>
+          <div class="field full"><label for="notes">Delivery instructions (optional)</label><textarea id="notes" name="delivery_notes" rows="2" maxlength="400" placeholder="Gate code, landmarks, best time to deliver"></textarea></div>
+        </div>
+        <button type="button" class="btn btn-primary" id="toPayment" style="margin-top:16px">Continue to payment <span aria-hidden="true">→</span></button>
+      </section>
+      <section class="co-card locked" id="stepPayment">
+        <h2>Payment</h2><p>Bank details and your unique payment reference appear on the next page.</p>
+        <div class="pay-method"><input type="radio" checked aria-label="EFT bank transfer"><div><strong>EFT / Instant bank transfer</strong><p>Pay from any SA bank, including Capitec and FNB. Your order ships once payment reflects.</p></div></div>
+        <label class="check" style="margin-top:16px"><input type="checkbox" id="terms" required> I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+        <button type="submit" class="btn btn-primary" id="placeOrder" style="margin-top:16px;width:100%;justify-content:center">Place order</button>
+        <div class="co-error" id="coError"></div>
+      </section>
+    </form>
+    <aside class="co-summary">
+      <h3>Order summary</h3>
+      <div id="summaryItems"></div>
+      <div class="co-totals">
+        <div class="cart-row"><span>Subtotal</span><span id="sumSubtotal">R0</span></div>
+        <div class="cart-row"><span>Delivery</span><span id="sumShipping">Added after address</span></div>
+        <div class="cart-row total"><span>Total</span><span id="sumTotal">R0</span></div>
+      </div>
+    </aside>
+  </div>
+</div></main>
+
+<footer class="fd-footer"><div class="fd-footer-grid"><div><div class="fd-brand"><div class="fd-logo">&lt;5&gt;</div><div class="fd-wordmark">Fives <span>Dev</span></div></div><p>Shop phones and laptops with clear prices, product details and delivery costs before you pay.</p></div><div><h4>Shop</h4><ul><li><a href="tech-store.html#catalog">All products</a></li><li><a href="track-your-order.html">Track your order</a></li><li><a href="tech-store.html#why">Why Us</a></li><li><a href="tech-store.html#faq">FAQ</a></li></ul></div><div><h4>Explore</h4><ul><li><a href="index.html#services">More Services</a></li><li><a href="tech-store.html">Tech Store</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="blog.html">Insights</a></li></ul></div><div><h4>Contact</h4><ul><li><a href="mailto:info@fivesdev.co.za">info@fivesdev.co.za</a></li><li><a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a></li><li><a href="https://www.tiktok.com/@codewithfives" target="_blank" rel="noopener">TikTok</a></li></ul></div></div><div class="fd-bottom"><div class="fd-copyright"><span>© <span id="fd-year"></span> Fives Dev. All rights reserved.</span><div class="fd-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div></div></div></footer>
+<script>document.getElementById('fd-year').textContent=new Date().getFullYear();</script>
+<script src="js/store-products.js"></script><script src="js/tech-store.js"></script>
+<script src="js/store-checkout.js"></script>
+</body>
+</html>

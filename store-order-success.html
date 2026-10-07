@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order received | Fives Dev Tech Store</title>
+  <meta name="description" content="Your order reference and bank transfer details from Fives Dev Tech Store.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico"><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/tech-store.css">
+</head>
+<body class="store-body">
+<div class="store-notice"><div class="store-notice-inner"><div class="store-notice-label">Fives Dev Tech Store <span class="notice-divider">·</span> South Africa</div><a class="track-order-top" href="track-your-order.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v11H3z"/><path d="M14 11h4l3 4v3h-7z"/><circle cx="7.5" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/><path d="M5 11h5M5 14h4"/></svg><span>Track your order</span></a></div></div>
+  <header><div class="wrap header-inner">
+    <a href="index.html" class="brand" aria-label="Fives Dev home"><div class="logo-mark">&lt;5&gt;</div><div class="brand-name">Fives <span>Dev</span></div></a>
+    <nav class="header-links" id="headerLinks" aria-label="Store navigation"><a href="tech-store.html#catalog" class="header-about">Shop</a><a href="tech-store.html#why" class="header-about">Why Us</a><a href="tech-store.html#faq" class="header-about">FAQ</a></nav>
+    <button class="top-cart" type="button" data-open-cart aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Cart <b data-cart-count>0</b></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  </div></header>
+  <main><div class="wrap order-confirmation">
+    <div class="order-message"><span class="eyebrow">Order received</span><h1>Thank you, <span id="custName">there</span>.</h1><p>Your order reference is <strong id="orderRef"></strong>. Choose the account you’d like to pay into and use this reference when making your EFT.</p></div>
+    <div class="order-layout">
+      <section class="co-card payment-account-card" aria-labelledby="paymentTitle">
+        <h2 id="paymentTitle">Pay by EFT</h2>
+        <p>Select the bank account you’d like to use for this payment.</p>
+        <label class="bank-choice-label" for="bankChoice">Bank account</label>
+        <select id="bankChoice" class="bank-choice"><option value="fnb">First National Bank (FNB)</option><option value="capitec">Capitec</option></select>
+        <div class="bank-details-card" id="bankDetails" aria-live="polite"></div>
+        <p class="bank-reference-note">Use this order number as your payment reference: <strong id="bankRef"></strong></p>
+      </section>
+      <aside id="order-summary" class="co-summary order-summary">
+        <h2>Your order</h2><div id="summaryItems"></div>
+        <div class="co-totals"><div class="cart-row"><span>Subtotal</span><span id="sumSubtotal"></span></div><div class="cart-row"><span>Delivery</span><span id="sumShipping"></span></div><div class="cart-row total"><span>Total</span><span id="sumTotal"></span></div></div>
+        <p class="deliver-to" id="shipTo"></p>
+      </aside>
+    </div>
+    <div class="store-success-actions"><a class="btn btn-primary" href="tech-store.html#catalog">Continue shopping <span aria-hidden="true">→</span></a></div>
+  </div></main>
+  <footer class="fd-footer"><div class="fd-footer-grid"><div><div class="fd-brand"><div class="fd-logo">&lt;5&gt;</div><div class="fd-wordmark">Fives <span>Dev</span></div></div><p>Shop phones and laptops with clear prices, product details and delivery costs before you pay.</p></div><div><h4>Shop</h4><ul><li><a href="tech-store.html#catalog">All products</a></li><li><a href="track-your-order.html">Track your order</a></li><li><a href="tech-store.html#why">Why Us</a></li><li><a href="tech-store.html#faq">FAQ</a></li></ul></div><div><h4>Explore</h4><ul><li><a href="index.html#services">More Services</a></li><li><a href="tech-store.html">Tech Store</a></li><li><a href="tools.html">Free Tools</a></li><li><a href="blog.html">Insights</a></li></ul></div><div><h4>Contact</h4><ul><li><a href="mailto:info@fivesdev.co.za">info@fivesdev.co.za</a></li><li><a href="https://whatsapp.com/channel/0029VbDAdudLSmbW0tU7vF3P" target="_blank" rel="noopener">WhatsApp Channel</a></li><li><a href="https://www.tiktok.com/@codewithfives" target="_blank" rel="noopener">TikTok</a></li></ul></div></div><div class="fd-bottom"><div class="fd-copyright"><span>© <span id="fd-year"></span> Fives Dev. All rights reserved.</span><div class="fd-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div></div></div></footer>
+  <script>document.getElementById('fd-year').textContent=new Date().getFullYear();</script>
+  <script src="js/store-products.js"></script><script src="js/tech-store.js"></script><script src="js/store-order-success.js"></script>
+</body></html>
