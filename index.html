@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/home-upgrade.css">
+<style>@media (min-width:901px){.header-links .nav-mobile-only{display:none}}</style>
 
 
 <link rel="canonical" href="https://fivesdev.co.za/">
@@ -24,6 +25,7 @@
 <meta property="og:description" content="A platform that helps young South Africans discover opportunities, gain useful skills, and bring their ideas or businesses online with web development support.">
 <meta property="og:image" content="https://fivesdev.co.za/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fivesdev.co.za/images/og-image.png">
 <meta name="twitter:title" content="Fives Dev | Home">
 <meta name="twitter:description" content="A platform that helps young South Africans discover opportunities, gain useful skills, and bring their ideas or businesses online with web development support.">
 <script type="application/ld+json">
@@ -63,6 +65,9 @@
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <div class="header-links" id="headerLinks">
+      <a href="index.html" class="header-about nav-mobile-only">Home</a>
+      <a href="index.html#services" class="header-about nav-mobile-only">Services</a>
+      <a href="tech-store.html" class="header-about">Tech Store</a>
       <a href="blog.html" class="header-about">Insights</a>
       <a href="tools.html" class="header-about">Free Tools</a>
       <a href="about.html" class="header-about">About</a>
@@ -131,13 +136,12 @@
           <div class="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5Z"/><path d="M6 11.5V17c0 1.2 2.7 2.5 6 2.5s6-1.3 6-2.5v-5.5"/></svg>
           </div>
-          <span class="price">From R40</span>
+          <span class="price free">Closed for now</span>
         </div>
         <h3>University Applications</h3>
-        <p>Browse every public university in SA and apply yourself for free, straight through their own portals. Rather have us do it for you? Tell us the institution and course, and we'll take it from there.</p>
+        <p>University application support is closed for the current cycle.</p>
         <div class="card-actions">
-          <a class="btn btn-ghost" href="universities.html">View all universities</a>
-          <a class="btn btn-primary card-cta" href="apply-assistance.html">Get application help <span class="arrow" aria-hidden="true">→</span></a>
+          <div style="width:100%;background:#eaf5ef;border-left:3px solid var(--primary);padding:10px 12px;border-radius:6px;color:var(--primary);font-size:14px;font-weight:600">We expect to reopen in February or March 2027.</div>
         </div>
       </article>
 
@@ -153,6 +157,21 @@
         <p>Got a cracked screen or battery dying too fast? We repair iPhones only at the moment. The price depends on your model and the part that needs replacing.</p>
         <div class="card-actions">
           <a class="btn btn-primary card-cta" href="iphone-repair.html">See how it works <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <!-- Tech Store -->
+      <article class="card service-card reveal">
+        <div class="card-top">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <span class="price">From R2 999</span>
+        </div>
+        <h3>Tech Store</h3>
+        <p>Browse iPhones, Samsung Galaxy phones and laptops. Confirm product details and delivery at checkout.</p>
+        <div class="card-actions">
+          <a class="btn btn-primary card-cta" href="tech-store.html">Shop the store <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
 
@@ -211,6 +230,15 @@
         <div>
           <h3>Enhancv</h3>
           <p>A CV platform we use to check whether your existing CV is actually readable by ATS software, and to tell you what's holding it back.</p>
+        </div>
+      </a>
+      <a class="partner-card" href="https://mocodeswebs.co.za/" target="_blank" rel="noopener noreferrer" style="flex-direction:column">
+        <div class="partner-logo" style="width:144px;height:35px;background:#fff;border:0;border-radius:8px;overflow:hidden">
+          <img src="data:image/png;base64,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" alt="MoCodesWebs logo" style="object-fit:contain;object-position:left center;border-radius:8px">
+        </div>
+        <div>
+          <h3>MoCodesWebs</h3>
+          <p>MoCodesWebs is our web development partner. Together, we collaborate on web projects and digital experiences.</p>
         </div>
       </a>
     </div>
@@ -317,11 +345,20 @@
 </script>
 
 <script>
-  document.getElementById('navToggle').addEventListener('click', function(){
-  const nav = document.getElementById('headerLinks');
-  const isOpen = nav.classList.toggle('open');
-  this.setAttribute('aria-expanded', isOpen);
-});
+  const navToggle = document.getElementById('navToggle');
+  const headerLinks = document.getElementById('headerLinks');
+
+  navToggle.addEventListener('click', function () {
+    const isOpen = headerLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  headerLinks.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      headerLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 </body>
 </html>
