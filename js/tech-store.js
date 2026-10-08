@@ -42,7 +42,7 @@
     var items = StoreCart.get();
     document.getElementById('drawerItems').innerHTML = items.length ? items.map(function (i) { return storeItemHtml(i, true); }).join('') : '<div class="cart-empty"><p>Your cart is empty.</p></div>';
     document.getElementById('drawerFoot').innerHTML = items.length ?
-      '<div class="cart-row total"><span>Subtotal</span><span>' + storeFormat(StoreCart.subtotal()) + '</span></div><small>Your delivery fee is estimated by courier based on the address you enter at checkout.</small><a class="btn btn-primary" href="store-checkout.html">Checkout <span aria-hidden="true">→</span></a>' :
+      '<div class="cart-row total"><span>Subtotal</span><span>' + storeFormat(StoreCart.subtotal()) + '</span></div><small>The delivery fee is shown after you enter your address at checkout.</small><a class="btn btn-primary" href="store-checkout.html">Checkout <span aria-hidden="true">→</span></a>' :
       '<a class="btn btn-ghost" href="tech-store.html#catalog" data-close-cart style="width:100%;justify-content:center">Browse products</a>';
   }
   function updateCount() { document.querySelectorAll('[data-cart-count]').forEach(function (el) { el.textContent = StoreCart.count(); }); if (document.body.classList.contains('cart-open')) renderDrawer(); }
@@ -59,7 +59,8 @@
   function card(p) {
     var sw = p.colours.slice(0, 5).map(function (c) { return '<i style="background:' + storeColour(c) + '" title="' + c + '"></i>'; }).join('');
     var meta = p.category === 'laptop' ? p.specs[1][1] + ' · ' + p.specs[2][1] : p.storages.map(function (s) { return s.label; }).join(' / ');
-    return '<a class="product-card" href="product.html?id=' + p.id + '"><div class="pc-img"><span class="pc-tag">' + p.condition + '</span><img loading="lazy" src="' + p.image + '" alt="' + p.brand + ' ' + p.model + '"></div><div class="pc-body"><span class="pc-brand">' + p.brand + '</span><h3 class="pc-name">' + p.model + '</h3><span class="pc-meta">' + meta + '</span><div class="pc-swatches">' + sw + '</div><div class="pc-price"><div><small>' + (p.storages.length > 1 ? 'From' : 'Price') + '</small><strong>' + storeFormat(p.price) + '</strong></div><span class="pc-view">View →</span></div></div></a>';
+    var sale = p.storages.some(function (s) { return s.wasPrice && s.wasPrice > s.price; });
+    return '<a class="product-card" href="product.html?id=' + p.id + '"><div class="pc-img"><span class="pc-tag">' + p.condition + '</span>' + (sale ? '<span class="pc-sale-tag">Sale</span>' : '') + '<img loading="lazy" src="' + p.image + '" alt="' + p.brand + ' ' + p.model + '"></div><div class="pc-body"><span class="pc-brand">' + p.brand + '</span><h3 class="pc-name">' + p.model + '</h3><span class="pc-meta">' + meta + '</span><div class="pc-swatches">' + sw + '</div><div class="pc-price"><div><small>' + (p.storages.length > 1 ? 'From' : 'Price') + '</small>' + (p.wasPrice ? '<del class="pc-was-price">' + storeFormat(p.wasPrice) + '</del>' : '') + '<strong class="' + (sale ? 'pc-sale-price' : '') + '">' + storeFormat(p.price) + '</strong></div><span class="pc-view">View →</span></div></div></a>';
   }
   function render() {
     var list = STORE_PRODUCTS.filter(function (p) {

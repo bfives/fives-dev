@@ -25,7 +25,8 @@
     '</tbody></table></div></div>';
 
   function update() {
-    document.getElementById('pdPrice').textContent = storeFormat(sel.storage.price);
+    var onSale = sel.storage.wasPrice && sel.storage.wasPrice > sel.storage.price;
+    document.getElementById('pdPrice').innerHTML = (onSale ? '<span class="pd-sale-tag">Sale</span><del class="pd-was-price">' + storeFormat(sel.storage.wasPrice) + '</del> ' : '') + '<strong class="' + (onSale ? 'pd-sale-price' : '') + '">' + storeFormat(sel.storage.price) + '</strong>';
     document.getElementById('selStorage').textContent = sel.storage.label;
     document.getElementById('selColour').textContent = sel.colour;
   }
